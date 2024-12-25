@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
+import axios from 'axios';
+
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
@@ -16,7 +18,8 @@ import 'jquery';
 import 'popper.js';
 
 
-
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
