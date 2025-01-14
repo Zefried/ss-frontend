@@ -2,7 +2,8 @@ import React from 'react'
 import { useEffect } from 'react'
 import axios from 'axios';
 
-export const Child = () => {
+
+export const GoogleAuthSignIn = () => {
 
 
   useEffect(() => {
@@ -42,3 +43,4 @@ export const Child = () => {
     </div>
   )
 }
+

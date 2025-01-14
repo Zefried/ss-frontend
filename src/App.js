@@ -1,26 +1,41 @@
-import {Routes, Route} from 'react-router-dom';
-import { Test } from './components/test';
-import { Child } from './components/Child';
-import { Home } from './components/Home';
+// All imports must be at the top
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './Dashboard/Home';
+import { AdminRegister } from './extraCompo/AccountRegister/AdminRegister';
+import { AdminLogin } from './extraCompo/Login Components/AdminLogin';
+import { GoogleAuthSignIn } from './extraCompo/Oauth2/GoogleAuthSignIn';
+import { Test } from './extraCompo/Test';
+import { AdminGuard } from './Guards/AdminGuard';
+
 
 function App() {
+
   return (
-
-
     <div className="App">
-        <Routes>
-          <Route path="/test" element={<Test/>}>
-            <Route path='xyg' element={<Child/>} />
-          </Route>
+      
+      
+      
+      <Routes>
 
-          <Route path='/home' element={<Home/>} />
-
-        </Routes>
-
+        <Route path='/admin-register' element={<AdminRegister />} />
+        <Route path='/admin-login' element={<AdminLogin />} />
 
 
+        {/* Admin Protected Routes starts from here */}
+        <Route path='admin-dashboard' element={<AdminGuard><Home></Home></AdminGuard>}>
+          <Route path='test' element={<Test></Test>}></Route>
+
+        </Route>
+        {/* Ends here */}
+
+      </Routes>
 
 
+
+
+
+
+      
     </div>
   );
 }
