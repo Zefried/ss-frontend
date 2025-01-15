@@ -22,7 +22,6 @@ export const Home = () => {
     let labTabs;
 
 
-
     if (role === 'admin') {
 
         adminTabs = (
@@ -41,7 +40,7 @@ export const Home = () => {
                 <div id="collapseFour" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div className="bg-white py-2 collapse-inner rounded">
                     <h6 className="collapse-header">Employee Masters</h6>
-                    <Link className="collapse-item" to='/admin/add-lab-user' >Add Lab Employee</Link>
+                    <Link className="collapse-item" to='/admin/add-lab-employee' >Add Lab Employee</Link>
                     <Link className="collapse-item" to='/admin/view-lab-employee' >View Lab Employee</Link>
 
                     <h6 className="collapse-header">Test Category</h6>
@@ -82,10 +81,6 @@ export const Home = () => {
                     <h6 className="collapse-header">Laboratory:</h6>
                     <Link className="collapse-item" to='/admin/add-lab' >Add Lab</Link>
                     <Link className="collapse-item" to='/admin/view-lab' >View Lab</Link>
-
-                    <h6 className="collapse-header">Insert Tests in Lab:</h6>
-                    <Link className="collapse-item" to='/admin/insert-lab-test' >Insert Test</Link>
-                    <Link className="collapse-item" to='/admin/view-inserted-test' >View Inserted Test</Link>
                 </div>
                 </div>
             </li>
@@ -105,9 +100,6 @@ export const Home = () => {
                     <Link className="collapse-item" to='/user/add-patient-request' >Add Patient</Link>
                     <Link className="collapse-item" to='/user/view-all-patient' >View All Patient</Link>
                     
-                    <h6 className="collapse-header">Assigned Patient Data:</h6>
-                    <Link className="collapse-item" to='/user/view-assigned-patient' >View Assigned Patient</Link>
-                    <Link className="collapse-item" to='/user/view-paid-patient' >View paid Patient</Link>
                 </div>
                 </div>
             </li>

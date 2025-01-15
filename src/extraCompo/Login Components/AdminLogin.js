@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { customStateMethods } from '../../StateMng/Slice/AuthSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 export const AdminLogin = () => {
     
     customStateMethods.initializeState();
-
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState(null);
@@ -44,6 +45,8 @@ export const AdminLogin = () => {
                         isAuthenticated:true,
                         token: res.data.token
                     }); 
+                    
+                    navigate('/admin-dashboard');
                 }
                 setLoading(false);
             })

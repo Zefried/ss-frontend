@@ -4,7 +4,6 @@ import { customStateMethods } from '../StateMng/Slice/AuthSlice';
 
 export const AdminGuard = ({ children }) => {
 
-
   const isAuthenticated = customStateMethods.selectStateKey('appState', 'isAuthenticated');
   const role = customStateMethods.selectStateKey('appState', 'role');
 
@@ -15,4 +14,5 @@ export const AdminGuard = ({ children }) => {
 
   // Otherwise, allow access to the children components (admin panel routes)
   return children;
+  
 };

@@ -6,6 +6,25 @@ import { AdminLogin } from './extraCompo/Login Components/AdminLogin';
 import { GoogleAuthSignIn } from './extraCompo/Oauth2/GoogleAuthSignIn';
 import { Test } from './extraCompo/Test';
 import { AdminGuard } from './Guards/AdminGuard';
+import { AddDoctors } from './Admin/Components/DoctorAndWorker/AddDoctor';
+import { ViewDoctors } from './Admin/Components/DoctorAndWorker/ViewDoctor';
+import { FullInformation } from './Admin/Components/DoctorAndWorker/FullInformation';
+import { DocCredentials } from './Admin/Components/DoctorAndWorker/DoctorCredentials';
+import { EditDoctor } from './Admin/Components/DoctorAndWorker/EditDoctor';
+import { AddLab } from './Admin/Components/Lab/AddLab';
+import { ViewLab } from './Admin/Components/Lab/ViewLab';
+import { LabInformation } from './Admin/Components/Lab/LabInformation';
+import { EditLab } from './Admin/Components/Lab/EditLab';
+import { LabCred } from './Admin/Components/Lab/LabCred';
+import { AddLabUser } from './Admin/Components/Lab/LabEmployee/AddLabUser';
+import { ViewLabEmployee } from './Admin/Components/Lab/LabEmployee/ViewLabEmployee';
+import { AssignEmployee } from './Admin/Components/Lab/LabEmployee/AssignEmployee';
+import { AddLabTestCategory } from './Admin/Components/Lab/LabTest/AddLabTestCategory';
+import { ViewTestCategory } from './Admin/Components/Lab/LabTest/ViewTestCategory';
+import { AddLabTest } from './Admin/Components/Lab/LabTest/AddLabTest';
+import { ViewLabTest } from './Admin/Components/Lab/LabTest/ViewLabTest';
+import { EditLabTestCategory } from './Admin/Components/Lab/LabTest/EditLabTestCategory';
+import { EditLabTest } from './Admin/Components/Lab/LabTest/EditLabTest';
 
 
 function App() {
@@ -22,8 +41,59 @@ function App() {
 
 
         {/* Admin Protected Routes starts from here */}
-        <Route path='admin-dashboard' element={<AdminGuard><Home></Home></AdminGuard>}>
+        <Route path='admin' element={<AdminGuard><Home></Home></AdminGuard>}>
           <Route path='test' element={<Test></Test>}></Route>
+
+
+          {/* admin and worker route starts here */}
+          <Route path='add-doctors' element={<AddDoctors/>}/>
+          <Route path='view-doctors' element={<ViewDoctors/>}/>
+          <Route path='full-information/:id' element={<FullInformation/>}/>
+          <Route path='doc-credentials/:id' element={<DocCredentials/>}/>
+          <Route path='edit-doctor/:id' element={<EditDoctor/>}/>
+          {/* ends here */}
+
+
+          {/* Lab and Hospital route starts here */}
+          <Route path='add-lab' element={<AddLab/>}/>
+          <Route path='view-lab' element={<ViewLab/>}/>
+          <Route path='lab-full-info/:id' element={<LabInformation/>}/>
+          <Route path='edit-lab/:id' element={<EditLab/>}/>
+          <Route path='lab-credentials/:id' element={<LabCred/>}/>
+          {/* ends here */}
+
+
+          {/* Lab employee routes starts here */}
+          <Route path='add-lab-employee' element={<AddLabUser/>}/>
+          <Route path='view-lab-employee' element={<ViewLabEmployee/>}/>
+          <Route path='assign-employee/:id' element={<AssignEmployee/>}/>
+          {/* ends here */}
+
+
+          {/* Lab Test and Test Categories master routes starts here */}
+
+          <Route path='add-lab-test-category' element={<AddLabTestCategory/>}/>
+          <Route path='view-test-category' element={<ViewTestCategory/>}/>
+           
+          <Route path='add-lab-test' element={<AddLabTest/>}/>
+          <Route path='view-lab-test' element={<ViewLabTest/>}/>
+           
+          <Route path='edit-lab-test-category/:id' element={<EditLabTestCategory/>}/>
+          <Route path='edit-lab-test/:id' element={<EditLabTest/>}/> 
+
+          {/* Ends here  */}
+
+
+
+
+
+
+
+
+
+
+
+
 
         </Route>
         {/* Ends here */}
