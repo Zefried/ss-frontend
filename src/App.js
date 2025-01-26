@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from './Dashboard/Home';
 import { AdminRegister } from './extraCompo/AccountRegister/AdminRegister';
 import { AdminLogin } from './extraCompo/Login Components/AdminLogin';
-import { GoogleAuthSignIn } from './extraCompo/Oauth2/GoogleAuthSignIn';
 import { Test } from './extraCompo/Test';
 import { AdminGuard } from './Guards/AdminGuard';
 import { AddDoctors } from './Admin/Components/DoctorAndWorker/AddDoctor';
@@ -25,6 +24,11 @@ import { AddLabTest } from './Admin/Components/Lab/LabTest/AddLabTest';
 import { ViewLabTest } from './Admin/Components/Lab/LabTest/ViewLabTest';
 import { EditLabTestCategory } from './Admin/Components/Lab/LabTest/EditLabTestCategory';
 import { EditLabTest } from './Admin/Components/Lab/LabTest/EditLabTest';
+import { UserLogin } from './extraCompo/Login Components/UserLogin';
+import { DocWorkerGuard } from './Guards/DocWorkerGuard';
+import { AddPatientLocation } from './User/Components/PatientLocation/AddPatientLocation';
+import { ViewPatientLocation } from './User/Components/PatientLocation/ViewPatientLocation';
+import { AddPatientRequest } from './User/Components/CRUD/PatientRegistrationRequest';
 
 
 function App() {
@@ -38,10 +42,12 @@ function App() {
 
         <Route path='/admin-register' element={<AdminRegister />} />
         <Route path='/admin-login' element={<AdminLogin />} />
+        <Route path='/user-login' element={<UserLogin />} />
 
 
         {/* Admin Protected Routes starts from here */}
         <Route path='admin' element={<AdminGuard><Home></Home></AdminGuard>}>
+          
           <Route path='test' element={<Test></Test>}></Route>
 
 
@@ -71,7 +77,6 @@ function App() {
 
 
           {/* Lab Test and Test Categories master routes starts here */}
-
           <Route path='add-lab-test-category' element={<AddLabTestCategory/>}/>
           <Route path='view-test-category' element={<ViewTestCategory/>}/>
            
@@ -80,23 +85,25 @@ function App() {
            
           <Route path='edit-lab-test-category/:id' element={<EditLabTestCategory/>}/>
           <Route path='edit-lab-test/:id' element={<EditLabTest/>}/> 
-
           {/* Ends here  */}
-
-
-
-
-
-
-
-
-
-
-
-
 
         </Route>
         {/* Ends here */}
+
+
+        <Route path='user' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
+        
+          {/* patient location registration request through user panel - routes starts from here  */}
+          <Route path='add-patient-location' element={<AddPatientLocation/>} />
+          <Route path='view-patient-location' element={<ViewPatientLocation/>} />
+
+
+          {/* patient registration request through user panel - routes starts from here  */}
+          <Route path='add-patient' element={<AddPatientRequest></AddPatientRequest>} />
+
+
+        </Route>
+
 
       </Routes>
 

@@ -97,8 +97,8 @@ export const Home = () => {
                     <Link className="collapse-item" to='/user/view-patient-location' >View Location</Link>
 
                     <h6 className="collapse-header">Patient Data:</h6>
-                    <Link className="collapse-item" to='/user/add-patient-request' >Add Patient</Link>
-                    <Link className="collapse-item" to='/user/view-all-patient' >View All Patient</Link>
+                    <Link className="collapse-item" to='/user/add-patient' >Add Patient</Link>
+                    <Link className="collapse-item" to='/user/view-all' >View All Patient</Link>
                     
                 </div>
                 </div>
@@ -125,9 +125,28 @@ export const Home = () => {
                 <div id="collapseThree" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div className="bg-white py-2 collapse-inner rounded">
                     <h6 className="collapse-header">Patient Registration </h6>
-                    <Link className="collapse-item" to='/user/add-patient-request' >Add Patient Request</Link>
-                    <Link className="collapse-item" to='/user/view-all-patient' >View All Patient</Link>
+                    <Link className="collapse-item" to='/user/add-patient' >Add Patient Request</Link>
+                    <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
                     {/* <Link className="collapse-item" to='/user/view-pending-patient' >View Pending Patient</Link> */}
+                </div>
+                </div>
+            </li>
+
+            <li className="nav-item">
+                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
+                <i className="fas fa-fw fa-cog" />
+                <span>Patient Control</span>
+                </a>
+                <div id="collapseFive" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div className="bg-white py-2 collapse-inner rounded">
+                    <h6 className="collapse-header">Patient Master:</h6>
+                    <Link className="collapse-item" to='/user/add-patient-location' >Add Patient location</Link>
+                    <Link className="collapse-item" to='/user/view-patient-location' >View Location</Link>
+
+                    <h6 className="collapse-header">Patient Data:</h6>
+                    <Link className="collapse-item" to='/user/add-patient-request' >Add Patient</Link>
+                    <Link className="collapse-item" to='/user/view-all-patient' >View All Patient</Link>
+                    
                 </div>
                 </div>
             </li>
@@ -167,7 +186,6 @@ export const Home = () => {
 
             </>
         );
-
     }
 
 
