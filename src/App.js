@@ -29,6 +29,10 @@ import { DocWorkerGuard } from './Guards/DocWorkerGuard';
 import { AddPatientLocation } from './User/Components/PatientLocation/AddPatientLocation';
 import { ViewPatientLocation } from './User/Components/PatientLocation/ViewPatientLocation';
 import { AddPatientRequest } from './User/Components/CRUD/PatientRegistrationRequest';
+import { ViewAllPatient } from './User/Components/CRUD/ViewAllPatient';
+import { PatientViewCard } from './User/Components/CRUD/PatientViewCard';
+import { AssigningTest } from './User/Components/PatientAssignFlow/AssigningTest';
+import { ViewAssignedTest } from './User/Components/PatientAssignFlow/ViewAssignedTest';
 
 
 function App() {
@@ -97,9 +101,14 @@ function App() {
           <Route path='add-patient-location' element={<AddPatientLocation/>} />
           <Route path='view-patient-location' element={<ViewPatientLocation/>} />
 
-
           {/* patient registration request through user panel - routes starts from here  */}
           <Route path='add-patient' element={<AddPatientRequest></AddPatientRequest>} />
+          <Route path='view-patient' element={<ViewAllPatient></ViewAllPatient>} />
+
+          {/* patient registration request through user panel - routes starts from here  */}
+          <Route path='view-patient-card/:id' element={<PatientViewCard></PatientViewCard>} />
+          <Route path='assign-patient/:id' element={<AssigningTest></AssigningTest>} />
+          <Route path='view-assigned-patients' element={<ViewAssignedTest></ViewAssignedTest>} />
 
 
         </Route>

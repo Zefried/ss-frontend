@@ -1,97 +1,131 @@
-import React from 'react';
-import { customStateMethods } from '../../../../Admin/protected/CustomAppState/CustomState';
-import usePagination from '../../../../CustomHook/usePagination';
-import useSearch from '../../../../CustomHook/useSearch';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import userIcon from '../../../../Assets/img/registration/userIcon.jpeg';
+import axios from 'axios';
+import { customStateMethods } from '../../../StateMng/Slice/AuthSlice';
+import patientIcon from '../../../assets/img/patient/patient.png';
 
 export const ViewAllPatient = () => {
   const token = customStateMethods.selectStateKey('appState', 'token');
-  const apiUrl = '/api/admin/lab-search';
+  
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [listData, setListData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null); // State to store selected item
 
-  // Using the custom search hook
-  const {
-    query,
-    handleSearch,
-    suggestions,
-    selected,
-    suggestionUI,
-    selectedItemUI,
-    messageUI,
-  } = useSearch(token, apiUrl);
+  useEffect(() => {
+    setLoading(true);
+    axios.get('/api/user/patient-crud/view-patient', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(response => {
+      const data = response.data?.listData || [];
+      setListData(Array.isArray(data) ? data : []);
+    })
+    .catch(err => console.error(err))
+    .finally(() => setLoading(false));
+  }, [token]);
 
-  // Use pagination hook
-  const { listData, loading, messages, paginationUI } = usePagination('/api/user/fetch-all-patient', token);
+  const handleSearch = (e) => {
+    const searchValue = e.target.value;
+    setQuery(searchValue);
+  
+    axios.get('/api/user/patient-crud/search-patient', {
+      params: { query: searchValue },
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      setSuggestions(res.data.results);
+    })
+    .catch(err => console.error(err));
+  };
 
-  const patientTable = listData?.map((item, index) => (
-    <tr key={item.id}>
-      <td>{index + 1}</td>
-      <td><img className='userIcon' src={userIcon} alt="User Icon" /></td>
-      <td>{item.name}</td>
-      <td>{item.age}</td>
-      <td>{item.phone}</td>
-      <td>{item.district}</td>
-      <td><Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm'>View Card</Link></td>
-      {/* <td><Link to={`/user/assign-patient-step-one/${item.id}`} className='btn btn-outline-success btn-sm'>Assign Patient</Link></td> */}
-      <td><Link to={`/user/view-patient-full-info/${item.id}`} className='btn btn-outline-primary btn-sm'>Full Info</Link></td>
-      <td><Link to={`/user/edit-patient/${item.id}`} className='btn btn-outline-success btn-sm'>Edit</Link></td>
-      <td><button className='btn btn-outline-danger btn-sm'>Disable</button></td>
-    </tr>
-  ));
+  const handleSelectItem = (selected) => {
+    setSelectedItem(selected); // Update table data with selected item
+    setSuggestions([]); // Hide suggestions after selection
+    setQuery('');
+  };
 
+
+  
   return (
     <div>
-        {loading && <p>Loading...</p>}
-        {messages && <div>{messages}</div>}
-
-
-      {/* Search Input */}
-      <input
-        className='form-control col-lg-5'
-        type="text"
-        value={query}
-        onChange={handleSearch}
-        placeholder="Search..."
-      />
-
-       {/* Suggestions UI */}
-       <div>
-        {suggestionUI()}
-        {selectedItemUI()}
-        {messageUI()}
+      {loading && <p>Loading...</p>}
+      <input className='form-control' type='text' value={query} onChange={handleSearch} placeholder='Search...' />
+      
+      {/* Search Suggestions */}
+      <div className="list-group col-lg-4">
+        {suggestions.map((s, i) => (
+          <div 
+            key={i} 
+            className="list-group-item list-group-item-action d-flex align-items-center mt-3"
+            onClick={() => handleSelectItem(s)}
+            style={{ cursor: "pointer" }}
+          >
+            <img src={patientIcon} alt="Patient" className="rounded-circle me-2" style={{ width: "30px", height: "30px" }} />
+            <div>
+              <span>Name: {s.name}</span>
+              <br />
+              <span>Phone: {s.phone}</span>
+            </div>
+          </div>
+        ))}
       </div>
 
-    
-
-      <p className="h3 text-center mt-3">View All Patient</p>
-
-      <div className="table-responsive table-container">
-        <table className="table table-striped table-bordered table-hover">
+      <p className='h3 text-center mt-3'>View All Patients</p>
+      <div className='table-responsive'>
+        <table className='table table-striped table-bordered'>
           <thead>
             <tr>
-              <th>S.No</th>
+              <th>S.no</th>
               <th>Profile</th>
               <th>Name</th>
               <th>Age</th>
               <th>Phone</th>
               <th>District</th>
-              <th>Patient Card</th>
-              {/* <th>Assign Patient</th> */}
-              <th>Full Info</th>
-              <th>Edit</th>
-              <th>Disable</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {patientTable}
+            {/* Show selectedItem if exists, else show listData */}
+            {selectedItem ? (
+              <tr key={selectedItem.id}>
+                <td>1</td>
+                <td><img className='userIcon' src={patientIcon} alt='User Icon' style={{ height: '35px', width: '35px' }} /></td>
+                <td>{selectedItem.name}</td>
+                <td>{selectedItem.age}</td>
+                <td>{selectedItem.phone}</td>
+                <td>{selectedItem.district}</td>
+                <td>
+                  <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info </Link>
+                  <Link to={`/user/edit-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>Edit</Link>
+                  <Link to={`/user/assign-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>Assign Test</Link>
+                  <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
+                  <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
+                </td>
+              </tr>
+            ) : (
+              listData.map((item, index) => (
+                <tr key={item.id}>
+                  <td>{index + 1}</td>
+                  <td><img className='userIcon' src={patientIcon} alt='User Icon' style={{ height: '35px', width: '35px' }} /></td>
+                  <td>{item.name}</td>
+                  <td>{item.age}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.district}</td>
+                  <td>
+                    <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info</Link>
+                    <Link to={`/user/edit-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>Edit</Link>
+                    <Link to={`/user/assign-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>Assign Test</Link>
+                    <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
+                    <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
-
-      {/* Render pagination UI */}
-      {paginationUI}
-
-     
     </div>
   );
 };

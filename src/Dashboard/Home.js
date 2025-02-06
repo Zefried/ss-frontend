@@ -98,7 +98,8 @@ export const Home = () => {
 
                     <h6 className="collapse-header">Patient Data:</h6>
                     <Link className="collapse-item" to='/user/add-patient' >Add Patient</Link>
-                    <Link className="collapse-item" to='/user/view-all' >View All Patient</Link>
+                    <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
+                    <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patient</Link>
                     
                 </div>
                 </div>
@@ -145,7 +146,8 @@ export const Home = () => {
 
                     <h6 className="collapse-header">Patient Data:</h6>
                     <Link className="collapse-item" to='/user/add-patient-request' >Add Patient</Link>
-                    <Link className="collapse-item" to='/user/view-all-patient' >View All Patient</Link>
+                    <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
+                    <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patient</Link>
                     
                 </div>
                 </div>

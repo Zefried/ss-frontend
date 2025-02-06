@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { customStateMethods } from '../../../../Admin/protected/CustomAppState/CustomState';
-import userIcon from  '../../../../Assets/img/registration/userIcon.jpeg';
+import { customStateMethods } from '../../../StateMng/Slice/AuthSlice';
+import userIcon from '../../../assets/img/user/userIcon.png';
 
 export const PatientViewCard = () => {
     let token = customStateMethods.selectStateKey('appState', 'token');
@@ -15,11 +15,12 @@ export const PatientViewCard = () => {
     const [patientData, setPatientData] = useState([]);
 
     useEffect(() => {
+
         try {
             setLoading(customStateMethods.spinnerDiv(true));
 
             axios.get('sanctum/csrf-cookie').then(() => {
-                axios.get(`/api/user/view-patient-card/${id}`, {
+                axios.get(`/api/user/patient-crud/view-patient-card/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }

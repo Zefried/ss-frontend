@@ -164,9 +164,9 @@ export const AddPatientRequest = () => {
        setServerResponse('');
     },5500)
 
-    setTimeout(()=>{
-      setMessages('');
-   },5500)
+  //   setTimeout(()=>{
+  //     setMessages('');
+  //  },5500)
   }
 
   function handleSelect(event){
@@ -240,95 +240,94 @@ export const AddPatientRequest = () => {
                                             
                                             {selectLocation}
                                          
-                                           
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input type="text" className="form-control" id="name" name="name" value={patientData.name} onChange={handleChange} placeholder="Full Name" />
-                                                <label htmlFor="name" className='mx-1'>Full Name</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.name : ''}
-                                                </span>
-                                            </div>
+                                                                                          
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input type="text" className="form-control" id="name" name="name" value={patientData.name} onChange={handleChange} placeholder="Full Name" />
+                                                    <label htmlFor="name" className='mx-1'>Full Name</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.name}
+                                                    </span>
+                                                </div>
 
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input type="number" className="form-control" id="age" name="age" value={patientData.age} onChange={handleChange} placeholder="Age" />
-                                                <label htmlFor="age" className='mx-1'>Age</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.age : ''}
-                                                </span>
-                                            </div>
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input type="number" className="form-control" id="age" name="age" value={patientData.age} onChange={handleChange} placeholder="Age" />
+                                                    <label htmlFor="age" className='mx-1'>Age</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.age}
+                                                    </span>
+                                                </div>
 
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input type="text" className="form-control" id="sex" name="sex" value={patientData.sex} onChange={handleChange} placeholder="Sex" />
-                                                <label htmlFor="sex" className='mx-1'>Sex</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.sex : ''}
-                                                </span>
-                                            </div>
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input type="text" className="form-control" id="sex" name="sex" value={patientData.sex} onChange={handleChange} placeholder="Sex" />
+                                                    <label htmlFor="sex" className='mx-1'>Sex</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.sex}
+                                                    </span>
+                                                </div>
 
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="relativeName" 
-                                                name="relativeName"
-                                                value={patientData.relativeName}
-                                                onChange={handleChange}
-                                                placeholder="Father/Mother/Spouse Name" 
-                                                />
-                                                <label htmlFor="relativeName" className='mx-1'>Father/Mother/Spouse Name</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.relativeName : ''}
-                                                </span>
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        id="relativeName" 
+                                                        name="relativeName"
+                                                        value={patientData.relativeName}
+                                                        onChange={handleChange}
+                                                        placeholder="Father/Mother/Spouse Name" 
+                                                    />
+                                                    <label htmlFor="relativeName" className='mx-1'>Father/Mother/Spouse Name</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.relativeName}
+                                                    </span>
+                                                </div>
 
-                                            </div>
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        id="phone" 
+                                                        name="phone"
+                                                        value={patientData.phone}
+                                                        onChange={handleChange}
+                                                        placeholder="Phone Number" 
+                                                    />
+                                                    <label htmlFor="phone" className='mx-1'>Phone Number</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.phone}
+                                                    </span>
+                                                </div>
 
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="phone" 
-                                                name="phone"
-                                                value={patientData.phone}
-                                                onChange={handleChange}
-                                                placeholder="Phone Number" 
-                                                />
-                                                <label htmlFor="phone" className='mx-1'>Phone Number</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.phone : ''}
-                                                </span>
-                                            </div>
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input 
+                                                        type="email" 
+                                                        className="form-control" 
+                                                        id="email" 
+                                                        name="email"
+                                                        value={patientData.email}
+                                                        onChange={handleChange}
+                                                        placeholder="Email" 
+                                                    />
+                                                    <label htmlFor="email" className='mx-1'>Email Address</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.email}
+                                                    </span>
+                                                </div>
 
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="email" 
-                                                className="form-control" 
-                                                id="email" 
-                                                name="email"
-                                                value={patientData.email}
-                                                onChange={handleChange}
-                                                placeholder="Email" 
-                                                />
-                                                <label htmlFor="email" className='mx-1'>Email Address</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.email : ''}
-                                                </span>
-                                            </div>
-
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="identityProof" 
-                                                name="identityProof"
-                                                value={patientData.identityProof}
-                                                onChange={handleChange}
-                                                placeholder="Aadhar no, PAN no" 
-                                                />
-                                                <label htmlFor="identityProof" className='mx-1'>Identity Proof</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.identityProof : ''}
-                                                </span>
-                                            </div>
+                                                <div className="form-floating mb-3 col-lg-6">
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        id="identityProof" 
+                                                        name="identityProof"
+                                                        value={patientData.identityProof}
+                                                        onChange={handleChange}
+                                                        placeholder="Aadhar no, PAN no" 
+                                                    />
+                                                    <label htmlFor="identityProof" className='mx-1'>Identity Proof</label>
+                                                    <span style={{ color: 'orange' }}>
+                                                        {serverResponse?.validation_error?.identityProof}
+                                                    </span>
+                                                </div>
 
                                             </>
                             )}
@@ -337,96 +336,100 @@ export const AddPatientRequest = () => {
                                             <>
                                             <h5 className="text-center mb-4">Address</h5>
                                             <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="village" 
-                                                name="village"
-                                                value={patientData.village}
-                                                onChange={handleChange}
-                                                placeholder="Village" 
-                                                />
-                                                <label htmlFor="village" className='mx-1'>Village</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.village : ''}
-                                                </span>
-                                            </div>
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="po" 
-                                                name="po"
-                                                value={patientData.po}
-                                                onChange={handleChange}
-                                                placeholder="Post Office" 
-                                                />
-                                                <label htmlFor="po" className='mx-1'>Post Office</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.po : ''}
-                                                </span>
-                                            </div>
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="ps" 
-                                                name="ps"
-                                                value={patientData.ps}
-                                                onChange={handleChange}
-                                                placeholder="Police Station" 
-                                                />
-                                                <label htmlFor="ps" className='mx-1'>Police Station</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.ps : ''}
-                                                </span>
-                                            </div>
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="pin" 
-                                                name="pin"
-                                                value={patientData.pin}
-                                                onChange={handleChange}
-                                                placeholder="PIN Code" 
-                                                />
-                                                <label htmlFor="pin" className='mx-1'>PIN Code</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.pin : ''}
-                                                </span>
-                                            </div>
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="district" 
-                                                name="district"
-                                                value={patientData.district}
-                                                onChange={handleChange}
-                                                placeholder="District" 
-                                                />
-                                                <label htmlFor="district" className='mx-1'>District</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.district : ''}
-                                                </span>
-                                            </div>
+                                              <input 
+                                                  type="text"   
+                                                  className="form-control" 
+                                                  id="village" 
+                                                  name="village"
+                                                  value={patientData.village}
+                                                  onChange={handleChange}
+                                                  placeholder="Village" 
+                                              />
+                                              <label htmlFor="village" className='mx-1'>Village</label>
+                                              <span style={{ color: 'orange' }}>
+                                                  {serverResponse?.validation_error?.village}
+                                              </span>
+                                          </div>
 
-                                            <div className="form-floating mb-3 col-lg-6">
-                                                <input 
-                                                type="text" 
-                                                className="form-control" 
-                                                id="state" 
-                                                name="state"
-                                                value={patientData.state}
-                                                onChange={handleChange}
-                                                placeholder="State" 
-                                                />
-                                                <label htmlFor="state" className='mx-1'>State</label>
-                                                <span style={{ color: 'orange' }}>
-                                                  {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.state : ''}
-                                                </span>
-                                            </div>
+                                          <div className="form-floating mb-3 col-lg-6">
+                                              <input 
+                                                  type="text" 
+                                                  className="form-control" 
+                                                  id="po" 
+                                                  name="po"
+                                                  value={patientData.po}
+                                                  onChange={handleChange}
+                                                  placeholder="Post Office" 
+                                              />
+                                              <label htmlFor="po" className='mx-1'>Post Office</label>
+                                              <span style={{ color: 'orange' }}>
+                                                  {serverResponse?.validation_error?.po}
+                                              </span>
+                                          </div>
+
+                                          <div className="form-floating mb-3 col-lg-6">
+                                              <input 
+                                                  type="text" 
+                                                  className="form-control" 
+                                                  id="ps" 
+                                                  name="ps"
+                                                  value={patientData.ps}
+                                                  onChange={handleChange}
+                                                  placeholder="Police Station" 
+                                              />
+                                              <label htmlFor="ps" className='mx-1'>Police Station</label>
+                                              <span style={{ color: 'orange' }}>
+                                                  {serverResponse?.validation_error?.ps}
+                                              </span>
+                                          </div>
+
+                                          <div className="form-floating mb-3 col-lg-6">
+                                              <input 
+                                                  type="text" 
+                                                  className="form-control" 
+                                                  id="pin" 
+                                                  name="pin"
+                                                  value={patientData.pin}
+                                                  onChange={handleChange}
+                                                  placeholder="PIN Code" 
+                                              />
+                                              <label htmlFor="pin" className='mx-1'>PIN Code</label>
+                                              <span style={{ color: 'orange' }}>
+                                                  {serverResponse?.validation_error?.pin}
+                                              </span>
+                                          </div>
+
+                                          <div className="form-floating mb-3 col-lg-6">
+                                              <input 
+                                                  type="text" 
+                                                  className="form-control" 
+                                                  id="district" 
+                                                  name="district"
+                                                  value={patientData.district}
+                                                  onChange={handleChange}
+                                                  placeholder="District" 
+                                              />
+                                              <label htmlFor="district" className='mx-1'>District</label>
+                                              <span style={{ color: 'orange' }}>
+                                                  {serverResponse?.validation_error?.district}
+                                              </span>
+                                          </div>
+
+                                          <div className="form-floating mb-3 col-lg-6">
+                                              <input 
+                                                  type="text" 
+                                                  className="form-control" 
+                                                  id="state" 
+                                                  name="state"
+                                                  value={patientData.state}
+                                                  onChange={handleChange}
+                                                  placeholder="State" 
+                                              />
+                                              <label htmlFor="state" className='mx-1'>State</label>
+                                              <span style={{ color: 'orange' }}>
+                                                  {serverResponse?.validation_error?.state}
+                                              </span>
+                                          </div>
                                             </>
                             )}
 
