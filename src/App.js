@@ -33,6 +33,8 @@ import { ViewAllPatient } from './User/Components/CRUD/ViewAllPatient';
 import { PatientViewCard } from './User/Components/CRUD/PatientViewCard';
 import { AssigningTest } from './User/Components/PatientAssignFlow/AssigningTest';
 import { ViewAssignedTest } from './User/Components/PatientAssignFlow/ViewAssignedTest';
+import { LabLogin } from './extraCompo/Login Components/LabLogin';
+import { HospitalLogin } from './extraCompo/Login Components/HospitalLogin';
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
         <Route path='/admin-register' element={<AdminRegister />} />
         <Route path='/admin-login' element={<AdminLogin />} />
         <Route path='/user-login' element={<UserLogin />} />
+        <Route path='/lab-login' element={<LabLogin />} />
+        <Route path='/hospital-login' element={<HospitalLogin />} />
 
 
         {/* Admin Protected Routes starts from here */}
@@ -111,6 +115,13 @@ function App() {
           <Route path='view-assigned-patients' element={<ViewAssignedTest></ViewAssignedTest>} />
 
 
+        </Route>
+
+
+        <Route path='hospital' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
+          
+        
+        
         </Route>
 
 

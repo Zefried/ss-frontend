@@ -126,7 +126,6 @@ export const Home = () => {
                 <div id="collapseThree" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div className="bg-white py-2 collapse-inner rounded">
                     <h6 className="collapse-header">Patient Registration </h6>
-                    <Link className="collapse-item" to='/user/add-patient' >Add Patient Request</Link>
                     <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
                     {/* <Link className="collapse-item" to='/user/view-pending-patient' >View Pending Patient</Link> */}
                 </div>
@@ -145,7 +144,7 @@ export const Home = () => {
                     <Link className="collapse-item" to='/user/view-patient-location' >View Location</Link>
 
                     <h6 className="collapse-header">Patient Data:</h6>
-                    <Link className="collapse-item" to='/user/add-patient-request' >Add Patient</Link>
+                    <Link className="collapse-item" to='/user/add-patient' >Add Patient</Link>
                     <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
                     <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patient</Link>
                     
@@ -166,7 +165,7 @@ export const Home = () => {
             <li className="nav-item active">
                 <Link to='/lab/view-lab-dashboard' className="nav-link" >
                     <i className="fas fa-fw fa-tachometer-alt" />
-                    <span> Dashboard</span>
+                    <span>Hospital | Lab Dashboard</span>
                 </Link>
             </li>
 
@@ -179,8 +178,8 @@ export const Home = () => {
                 <div id="collapseThree" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div className="bg-white py-2 collapse-inner rounded">
                     <h6 className="collapse-header">Patient Data</h6>
-                    <Link className="collapse-item" to='/lab/view-assigned-patient-lab' >View Assigned Patient</Link>
-                    <Link className="collapse-item" to='/lab/view-paid-patient' >View Paid Patient</Link>
+                    <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patient</Link>
+                    <Link className="collapse-item" to='/user/view-paid-patients' >View Paid Patient</Link>
                 </div>
                 </div>
             </li>

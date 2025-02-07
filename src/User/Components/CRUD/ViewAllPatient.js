@@ -27,6 +27,8 @@ export const ViewAllPatient = () => {
   }, [token]);
 
   const handleSearch = (e) => {
+    setLoading(true);
+
     const searchValue = e.target.value;
     setQuery(searchValue);
   
@@ -36,8 +38,11 @@ export const ViewAllPatient = () => {
     })
     .then(res => {
       setSuggestions(res.data.results);
+      setLoading(false)
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err) && setLoading(false));
+
+
   };
 
   const handleSelectItem = (selected) => {
@@ -55,21 +60,25 @@ export const ViewAllPatient = () => {
       
       {/* Search Suggestions */}
       <div className="list-group col-lg-4">
-        {suggestions.map((s, i) => (
-          <div 
-            key={i} 
-            className="list-group-item list-group-item-action d-flex align-items-center mt-3"
-            onClick={() => handleSelectItem(s)}
-            style={{ cursor: "pointer" }}
-          >
-            <img src={patientIcon} alt="Patient" className="rounded-circle me-2" style={{ width: "30px", height: "30px" }} />
-            <div>
-              <span>Name: {s.name}</span>
-              <br />
-              <span>Phone: {s.phone}</span>
+        {Array.isArray(suggestions) && suggestions.length > 0 ? (
+          suggestions.map((s, i) => (
+            <div 
+              key={i} 
+              className="list-group-item list-group-item-action d-flex align-items-center mt-3"
+              onClick={() => handleSelectItem(s)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src={patientIcon} alt="Patient" className="rounded-circle me-2" style={{ width: "30px", height: "30px" }} />
+              <div>
+                <span>Name: {s.name}</span>
+                <br />
+                <span>Phone: {s.phone}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <p className='h3 text-center mt-3'>View All Patients</p>
