@@ -38,6 +38,7 @@ export const ViewLab = () => {
     const [selected, setSelected] = useState(null);
     // ends here 
 
+    console.log(selected ? selected : '', 'selected')
 
     // Pagination state starts from here
     const [currentPage, setCurrentPage] = useState(1);
@@ -154,6 +155,8 @@ export const ViewLab = () => {
         
                 setSuggestions(response.data.suggestions);
            
+                console.log('suggestion', suggestions);
+
                 setMessages(customStateMethods.getAlertDiv(response.data.message));
         
                 setLoading(false);
@@ -170,8 +173,8 @@ export const ViewLab = () => {
             }
           };
         
-          const handleSuggestionClick = (id, phone, email, name, workDistrict) => {
-            setSelected({ id, phone, email, name, workDistrict });
+          const handleSuggestionClick = (id, phone, email, name, district, user_id) => {
+            setSelected({ id, phone, email, name, district, user_id });
             setQuery(phone); // Updating the input field with the selected phone number
             setSuggestions([]); // Clearing suggestions
           };
@@ -241,8 +244,8 @@ export const ViewLab = () => {
           let selectedOneItemJsx = '';
 
           if (suggestions && suggestions.length > 0) {
-              userCard = suggestions.map(({ id, phone, email, name, district }) => (
-                  <ul className="row list-group" key={id} onClick={() => handleSuggestionClick(id, phone, email, name, district)} style={{ cursor: 'pointer' }}>
+              userCard = suggestions.map(({ id, phone, email, name, district, user_id }) => (
+                  <ul className="row list-group" key={id} onClick={() => handleSuggestionClick(id, phone, email, name, district, user_id)} style={{ cursor: 'pointer' }}>
                       <li className="list-group-item col-md-6 text-dark mt-3 mx-4">
                           <strong>Name:</strong> {name} | <strong>Phone:</strong> {phone} | <strong>District:</strong> {district}
                       </li>
@@ -272,7 +275,7 @@ export const ViewLab = () => {
                         </Link>
                     </td>
                     <td>
-                        <Link to={`/admin/lab-credentials/${selected.id}`} className='btn btn-outline-primary btn-sm'>
+                        <Link to={`/admin/lab-credentials/${selected.user_id}`} className='btn btn-outline-primary btn-sm'>
                             Credentials
                         </Link>
                     </td>
