@@ -118,7 +118,9 @@ function App() {
         </Route>
 
 
-        <Route path='hospital' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
+  
+
+        <Route path='lab' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
           
         
         

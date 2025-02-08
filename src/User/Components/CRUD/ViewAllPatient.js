@@ -6,6 +6,7 @@ import patientIcon from '../../../assets/img/patient/patient.png';
 
 export const ViewAllPatient = () => {
   const token = customStateMethods.selectStateKey('appState', 'token');
+  const role = customStateMethods.selectStateKey('appState', 'role');
   
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -31,17 +32,20 @@ export const ViewAllPatient = () => {
 
     const searchValue = e.target.value;
     setQuery(searchValue);
-  
-    axios.get('/api/user/patient-crud/search-patient', {
-      params: { query: searchValue },
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => {
-      setSuggestions(res.data.results);
-      setLoading(false)
-    })
-    .catch(err => console.error(err) && setLoading(false));
 
+    if(searchValue.length > 3) {
+      axios.get('/api/user/patient-crud/search-patient', {
+        params: { query: searchValue },
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        setSuggestions(res.data.results);
+        setLoading(false)
+      })
+      .catch(err => console.error(err) && setLoading(false));
+    }
+  
+    
 
   };
 
@@ -108,7 +112,14 @@ export const ViewAllPatient = () => {
                 <td>
                   <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info </Link>
                   <Link to={`/user/edit-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>Edit</Link>
-                  <Link to={`/user/assign-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>Assign Test</Link>
+                  {
+                      (role !== 'lab' && role !== 'hospital') && (
+                        <Link to={`/user/assign-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>
+                          Assign Test
+                        </Link>
+                      )
+                    }
+
                   <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
                   <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
                 </td>
@@ -125,7 +136,17 @@ export const ViewAllPatient = () => {
                   <td>
                     <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info</Link>
                     <Link to={`/user/edit-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>Edit</Link>
-                    <Link to={`/user/assign-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>Assign Test</Link>
+                    
+                    {
+                      (role !== 'lab' && role !== 'hospital') && (
+                        <Link to={`/user/assign-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>
+                          Assign Test
+                        </Link>
+                      )
+                    }
+
+                     
+                    
                     <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
                     <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
                   </td>

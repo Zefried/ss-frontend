@@ -46,7 +46,7 @@ export const AdminLogin = () => {
                         token: res.data.token
                     }); 
                     
-                    navigate('/admin-dashboard');
+                    navigate('/admin');
                 }
                 setLoading(false);
             })

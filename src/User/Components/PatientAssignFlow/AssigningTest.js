@@ -9,6 +9,7 @@ export const AssigningTest = () => {
     const token = customStateMethods.selectStateKey('appState', 'token');
     const [loading, setLoading] = useState(null);
     const [messages, setMessages] = useState(null);
+    let assignedMessage = null;
     const navigate = useNavigate();
 
     // Search Module state starts from here
@@ -154,8 +155,9 @@ export const AssigningTest = () => {
                     },
                 }
             );
-    
-            console.log("Success:", response.data);
+
+            alert(response.data.message);
+            
         } catch (error) {
             console.error("Error submitting data:", error.response?.data || error);
         }
@@ -166,6 +168,7 @@ export const AssigningTest = () => {
             {/* loading UI starts here */}
             {loading}
             {messages}
+            {assignedMessage}
             {/* ends here */}
 
 

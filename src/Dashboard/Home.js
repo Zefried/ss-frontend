@@ -118,19 +118,6 @@ export const Home = () => {
                 <span>User Dashboard</span></a>
             </li>
 
-            <li className="nav-item">
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                <i className="fas fa-fw fa-cog" />
-                <span>Patient Registration</span>
-                </a>
-                <div id="collapseThree" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div className="bg-white py-2 collapse-inner rounded">
-                    <h6 className="collapse-header">Patient Registration </h6>
-                    <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
-                    {/* <Link className="collapse-item" to='/user/view-pending-patient' >View Pending Patient</Link> */}
-                </div>
-                </div>
-            </li>
 
             <li className="nav-item">
                 <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
@@ -156,7 +143,6 @@ export const Home = () => {
         );
 
     }
-
     
     if (role === 'hospital' || role === 'lab') {
         

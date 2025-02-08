@@ -40,7 +40,7 @@ export const HospitalLogin = () => {
                         isAuthenticated: true,
                         token: res.data.token
                     });
-                    navigate('/hospital-dashboard');
+                    navigate('/hospital');
                 }
                 setLoading(false);
             })
