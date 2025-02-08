@@ -33,7 +33,7 @@ export const ViewAllPatient = () => {
     const searchValue = e.target.value;
     setQuery(searchValue);
 
-    if(searchValue.length > 3) {
+    if(searchValue.length > 2) {
       axios.get('/api/user/patient-crud/search-patient', {
         params: { query: searchValue },
         headers: { Authorization: `Bearer ${token}` }
