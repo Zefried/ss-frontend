@@ -4,17 +4,17 @@ import { customStateMethods } from "../../../StateMng/Slice/AuthSlice";
 import { useParams } from "react-router-dom";
 
 export const BillingStepOne = () => {
-
   const { id } = useParams();
   const token = customStateMethods.selectStateKey("appState", "token");
 
   const [loading, setLoading] = useState(true);
   const [patientData, setPatientData] = useState(null);
   const [selectedTests, setSelectedTests] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(""); // Selected employee state
+  const [selectedEmployee, setSelectedEmployee] = useState("");
   const [amount, setAmount] = useState("");
   const [discount, setDiscount] = useState("");
   const [finalAmount, setFinalAmount] = useState("");
+  const [file, setFile] = useState(null); // File state
 
   useEffect(() => {
     const fetchPatientData = async () => {
@@ -25,21 +25,16 @@ export const BillingStepOne = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-      
+
         const patient = response.data?.data;
-       
         if (patient) {
           setPatientData(patient);
           setSelectedTests(patient?.tests?.tests || []);
           setDiscount(patient?.tests?.discount || 0);
         }
-
-
-
       } catch (error) {
         alert(error.response.data.message);
         console.error("Error fetching patient data:", error);
-
       } finally {
         setLoading(false);
       }
@@ -48,29 +43,8 @@ export const BillingStepOne = () => {
     fetchPatientData();
   }, [id, token]);
 
-  const handleTestSelection = (testId) => {
-    setSelectedTests((prevTests) =>
-      prevTests.some((test) => test.id === testId)
-        ? prevTests.filter((test) => test.id !== testId)
-        : [...prevTests, patientData?.tests?.tests?.find((t) => t.id === testId)]
-    );
-  };
-
-  const calculateFinalAmount = (amountValue, discountValue) => {
-    if (!amountValue) return "";
-    return (amountValue - (amountValue * discountValue) / 100).toFixed(2);
-  };
-
-  const handleAmountChange = (e) => {
-    const value = e.target.value;
-    setAmount(value);
-    setFinalAmount(calculateFinalAmount(value, discount));
-  };
-
-  const handleDiscountChange = (e) => {
-    const value = e.target.value;
-    setDiscount(value);
-    setFinalAmount(calculateFinalAmount(amount, value));
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = async () => {
@@ -79,21 +53,19 @@ export const BillingStepOne = () => {
       return;
     }
 
-    const payload = {
-      patient_id: id,
-      associated_user_id: patientData?.patient?.associated_user_id,
-      selected_tests: selectedTests.map((test) => test.id),
-      final_amount: finalAmount,
-      discount: discount,
-      selected_employee: selectedEmployee, // Include selected employee
-    };
-
-    console.log(payload);
+    const formData = new FormData();
+    formData.append("patient_id", id);
+    formData.append("associated_user_id", patientData?.patient?.associated_user_id);
+    formData.append("final_amount", finalAmount);
+    formData.append("discount", discount);
+    formData.append("selected_employee", selectedEmployee);
+    selectedTests.forEach((testId) => formData.append("selected_tests[]", testId));
+    if (file) formData.append("file", file); // Append file if selected
 
     try {
-      await axios.post("/api/lab/flow/submit-billing", payload, {
+      await axios.post("/api/lab/flow/submit-billing", formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -106,10 +78,7 @@ export const BillingStepOne = () => {
   };
 
   if (loading) return <p>Loading...</p>;
-
-  if (!patientData) {
-    return <p>We cannot proceed further. Please add a lab employee first.</p>;
-  }
+  if (!patientData) return <p>We cannot proceed further. Please add a lab employee first.</p>;
 
   return (
     <div className="container mt-4">
@@ -123,39 +92,11 @@ export const BillingStepOne = () => {
       </div>
 
       <div className="card p-3 mb-4">
-        <h5>Assigned Tests</h5>
-        {patientData?.tests?.tests?.length ? (
-          patientData.tests.tests.map((test) => (
-            <div key={test.id} className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id={`test-${test.id}`}
-                checked={selectedTests.some((t) => t.id === test.id)}
-                onChange={() => handleTestSelection(test.id)}
-              />
-              <label className="form-check-label" htmlFor={`test-${test.id}`}>
-                {test.name}
-              </label>
-            </div>
-          ))
-        ) : (
-          <p>No assigned tests found.</p>
-        )}
-      </div>
-
-      <div className="card p-3 mb-4">
         <h5>Assign Lab Employee</h5>
-        <select
-          className="form-control"
-          value={selectedEmployee}
-          onChange={(e) => setSelectedEmployee(e.target.value)}
-        >
+        <select className="form-control" value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)}>
           <option value="">Select Employee</option>
           {patientData?.employeeData?.map((employee) => (
-            <option key={employee.id} value={employee.id}>
-              {employee.name}
-            </option>
+            <option key={employee.id} value={employee.id}>{employee.name}</option>
           ))}
         </select>
       </div>
@@ -163,33 +104,18 @@ export const BillingStepOne = () => {
       <div className="card p-3">
         <h5>Billing Details</h5>
         <label className="form-label">Enter Amount:</label>
-        <input
-          type="number"
-          className="form-control mb-2"
-          value={amount}
-          onChange={handleAmountChange}
-          placeholder="Enter total amount"
-        />
+        <input type="number" className="form-control mb-2" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter total amount" />
 
         <label className="form-label">Discount Applied (%):</label>
-        <input
-          type="number"
-          className="form-control mb-2"
-          value={discount}
-          onChange={handleDiscountChange}
-        />
+        <input type="number" className="form-control mb-2" value={discount} onChange={(e) => setDiscount(e.target.value)} />
 
         <label className="form-label">Final Amount After Discount:</label>
-        <input
-          type="number"
-          className="form-control mb-2"
-          value={finalAmount}
-          readOnly
-        />
+        <input type="number" className="form-control mb-2" value={finalAmount} readOnly />
 
-        <button className="btn btn-primary mt-3" onClick={handleSubmit}>
-          Submit Billing
-        </button>
+        <label className="form-label">Upload File (Optional):</label>
+        <input type="file" className="form-control mb-2" onChange={handleFileChange} />
+
+        <button className="btn btn-primary mt-3" onClick={handleSubmit}>Submit Billing</button>
       </div>
     </div>
   );
