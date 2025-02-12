@@ -35,7 +35,8 @@ import { AssigningTest } from './User/Components/PatientAssignFlow/AssigningTest
 import { ViewAssignedTest } from './User/Components/PatientAssignFlow/ViewAssignedTest';
 import { LabLogin } from './extraCompo/Login Components/LabLogin';
 import { HospitalLogin } from './extraCompo/Login Components/HospitalLogin';
-
+import {ViewPaidPatient} from './Lab/Components/BillingFlow/ViewPaidPatient';
+import { BillingStepOne } from './Lab/Components/BillingFlow/BillingStepOne';
 
 function App() {
 
@@ -122,6 +123,8 @@ function App() {
 
         <Route path='lab' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
           
+          <Route path='billing-step-one/:id' element={<BillingStepOne></BillingStepOne>} />
+          <Route path='view-paid-patients' element={<ViewPaidPatient></ViewPaidPatient>} />
         
         
         </Route>

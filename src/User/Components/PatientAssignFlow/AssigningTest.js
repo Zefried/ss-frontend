@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import labIcon from '../../../assets/img/lab/labIcon.jpg'; 
 
 export const AssigningTest = () => {
+
     // Additional State starts from here
     const token = customStateMethods.selectStateKey('appState', 'token');
     const [loading, setLoading] = useState(null);
@@ -17,6 +18,7 @@ export const AssigningTest = () => {
     const [suggestions, setSuggestions] = useState([]);
     const [selected, setSelected] = useState([]);  // Keep selected as an array to accumulate selections
     const [selectedTest, setSelectedTest] = useState([]); // State to store selected test items
+    const [discount, setDiscount] = useState(0);
     // ends here
 
     // Importing patient id
@@ -54,9 +56,6 @@ export const AssigningTest = () => {
         
     }, [patientId]);
     
-    console.log(patientData);
-    // patient card data ends here
-
 
     /////// Search Module Functions starts from here
     const handleSearch = async (e) => {
@@ -111,6 +110,11 @@ export const AssigningTest = () => {
         });
     };
 
+    const handleDiscount = (e) =>{
+        const discount = e.target.value;
+        setDiscount(discount);
+    }
+
     //////// Search Module Custom JSX starts from here
     let userCard = '';
     let suggestionJSX = '';
@@ -134,34 +138,39 @@ export const AssigningTest = () => {
 
     const SubmitPatientTest = async () => {
 
-        if (!patientData || selectedTest.length === 0) {
+    if (!patientData || selectedTest.length === 0) {
+        alert("Missing patient data or no tests selected.");
+        return;
+    }
 
-            alert("Missing patient data or no tests selected.");
-            return;
+    if (!discount) {
+        alert("Please enter the discount amount even if its 0.");
+        return;
+    }
 
-        }
-    
-        try {
-            const response = await axios.post(
-                "/api/user/patient-assign-flow/assigning/test",
-                {
-                    patient_id: patientData.id,
-                    tests: selectedTest.map(test => ({ id: test.id, name: test.name })),
+    try {
+        const response = await axios.post(
+            "/api/user/patient-assign-flow/assigning/test",
+            {
+                patient_id: patientData.id,
+                tests: selectedTest.map(test => ({ id: test.id, name: test.name })),
+                discount: discount, // Include the discount in the request
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+            }
+        );
 
-            alert(response.data.message);
-            
-        } catch (error) {
-            console.error("Error submitting data:", error.response?.data || error);
-        }
+        alert(response.data.message);
+        
+    } catch (error) {
+        console.error("Error submitting data:", error.response?.data || error);
+    }
     };
+
 
     return (
         <div>
@@ -218,6 +227,7 @@ export const AssigningTest = () => {
             </div>
             {/* patient data UI ends here */}
 
+
             {/* Render selected items with an image */}
             {selected.length > 0 && (
                 <div>
@@ -259,9 +269,21 @@ export const AssigningTest = () => {
             )}
 
         
-        <div className='mt-5 text-center'>
-            <button className='btn btn-outline-danger btn-lg' onClick={SubmitPatientTest}>Assign Test To Patient {patientData?.name}</button>
-        </div>
+            {/* discount amount field  */}
+            <div className="m-5">
+                <label className="form-label fw-bold">Add Discount</label>
+                <div className="col-lg-3 col-md-4 col-sm-6">
+                    <input className="form-control" type="text" placeholder="Add discount e.g., 15%" onChange={handleDiscount} />
+                </div>
+            </div>
+
+          
+            {/* ends here */}
+
+
+            <div className='mt-5 text-center'>
+                <button className='btn btn-outline-danger btn-lg' onClick={SubmitPatientTest}>Assign Test To Patient {patientData?.name}</button>
+            </div>
 
 
         </div>

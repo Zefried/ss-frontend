@@ -15,7 +15,9 @@ export const ViewAllPatient = () => {
   const [selectedItem, setSelectedItem] = useState(null); // State to store selected item
 
   useEffect(() => {
+
     setLoading(true);
+
     axios.get('/api/user/patient-crud/view-patient', {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -25,6 +27,16 @@ export const ViewAllPatient = () => {
     })
     .catch(err => console.error(err))
     .finally(() => setLoading(false));
+
+    const checkVisit = async () => {
+      const res = await axios.get('/api/user/patient-assign-flow/check-visit', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log(res.data);
+    }
+
+    checkVisit();
+
   }, [token]);
 
   const handleSearch = (e) => {
@@ -144,9 +156,7 @@ export const ViewAllPatient = () => {
                         </Link>
                       )
                     }
-
-                     
-                    
+       
                     <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
                     <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
                   </td>

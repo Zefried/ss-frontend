@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const AdminRegister = () => {
     const [loading, setLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
     const [alertType, setAlertType] = useState(''); // 'success' or 'danger'
+    const navigate = useNavigate();
 
     const [serverResponse, setServerResponse] = useState({
         validation_error: {},
@@ -49,6 +51,7 @@ export const AdminRegister = () => {
                     } else {
                         setAlertMessage(res.data.message);
                         setAlertType('success');
+                        navigate('/admin-login');
                     }
 
                     setLoading(false);

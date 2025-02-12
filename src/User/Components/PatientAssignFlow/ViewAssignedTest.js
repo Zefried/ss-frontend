@@ -71,7 +71,8 @@ export const ViewAssignedTest = () => {
       setQuery('');
     };
 
-      
+
+   
   
     return (
       <div>
@@ -130,11 +131,12 @@ export const ViewAssignedTest = () => {
             {
               (role === 'lab' || role === 'hospital') && (
                 <td>
-                  <Link className="btn btn-info btn-sm mt-3" to="/test">Proceed To Billing</Link>
+                  <Link className="btn btn-info btn-sm mt-3" to={`/lab/billing-step-one/${selectedItem?.patient_id}`}>
+                    Proceed To Billing
+                  </Link>
                 </td>
               )
             }
-
 
           </div>
         ) : (
