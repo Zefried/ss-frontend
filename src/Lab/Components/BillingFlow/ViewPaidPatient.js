@@ -99,7 +99,7 @@ export const ViewPaidPatient = () => {
                 <td>{item.phone}</td>
                 <td>{item.district}</td>
                 <td>
-                  <Link to={`/user/view-paid-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info</Link>
+                  <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>View Bill</Link>
                 </td>
               </tr>
             ))}

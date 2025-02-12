@@ -37,6 +37,7 @@ import { LabLogin } from './extraCompo/Login Components/LabLogin';
 import { HospitalLogin } from './extraCompo/Login Components/HospitalLogin';
 import {ViewPaidPatient} from './Lab/Components/BillingFlow/ViewPaidPatient';
 import { BillingStepOne } from './Lab/Components/BillingFlow/BillingStepOne';
+import { ViewBillPdf } from './Lab/Components/BillingFlow/ViewBillPdf';
 
 function App() {
 
@@ -125,6 +126,7 @@ function App() {
           
           <Route path='billing-step-one/:id' element={<BillingStepOne></BillingStepOne>} />
           <Route path='view-paid-patients' element={<ViewPaidPatient></ViewPaidPatient>} />
+          <Route path='view-paid-patient-bill/:id' element={<ViewBillPdf></ViewBillPdf>} />
         
         
         </Route>
