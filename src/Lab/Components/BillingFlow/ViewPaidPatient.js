@@ -87,7 +87,11 @@ export const ViewPaidPatient = () => {
               <th>Age</th>
               <th>Phone</th>
               <th>District</th>
-              <th>Actions</th>
+              {
+                role !== 'admin'(
+                  <th>Actions</th>
+                )
+              }
             </tr>
           </thead>
           <tbody>
