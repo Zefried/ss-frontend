@@ -38,6 +38,9 @@ import { HospitalLogin } from './extraCompo/Login Components/HospitalLogin';
 import {ViewPaidPatient} from './Lab/Components/BillingFlow/ViewPaidPatient';
 import { BillingStepOne } from './Lab/Components/BillingFlow/BillingStepOne';
 import { ViewBillPdf } from './Lab/Components/BillingFlow/ViewBillPdf';
+import { ViewPendingTestPatients } from './Lab/Components/BillingFlow/ViewPendingTestPatients';
+import { LabHosDashboard } from './Dashboard/Labs/LabHosDashboard';
+import { AdminDashboard } from './Dashboard/Admin/AdminDashboard';
 
 function App() {
 
@@ -57,6 +60,7 @@ function App() {
 
         {/* Admin Protected Routes starts from here */}
         <Route path='admin' element={<AdminGuard><Home></Home></AdminGuard>}>
+          <Route index element={<AdminDashboard />} />
           
           <Route path='test' element={<Test></Test>}></Route>
 
@@ -123,10 +127,11 @@ function App() {
   
 
         <Route path='lab' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
-          
+          <Route index element={<LabHosDashboard />} />
           <Route path='billing-step-one/:id' element={<BillingStepOne></BillingStepOne>} />
           <Route path='view-paid-patients' element={<ViewPaidPatient></ViewPaidPatient>} />
           <Route path='view-paid-patient-bill/:id' element={<ViewBillPdf></ViewBillPdf>} />
+          <Route path='view-pending-patients' element={<ViewPendingTestPatients></ViewPendingTestPatients>} />
         
         
         </Route>
