@@ -6,6 +6,7 @@ import patientIcon from '../../../assets/img/patient/patient.png';
 
 export const ViewPendingTestPatients = () => {
   const token = customStateMethods.selectStateKey('appState', 'token');
+  let role = customStateMethods.selectStateKey('appState', 'role');
 
   const [query, setQuery] = useState('');
   const [listData, setListData] = useState([]);
@@ -100,13 +101,12 @@ export const ViewPendingTestPatients = () => {
                 <td>{item.phone}</td>
                 <td>{item.district}</td>
 
-                {
-                  role === 'admin' && (
-                    <td>
+                {role !== 'admin' && (
+                  <td>
                     <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>View Bill</Link>
-                    </td>
-                  )
-                }
+                  </td>
+                )}
+
                
               </tr>
             ))}
