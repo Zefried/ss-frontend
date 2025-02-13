@@ -88,7 +88,7 @@ export const ViewPaidPatient = () => {
               <th>Phone</th>
               <th>District</th>
               {
-                role !== 'admin'(
+                role !== 'admin' && (
                   <th>Actions</th>
                 )
               }
@@ -108,8 +108,6 @@ export const ViewPaidPatient = () => {
                     <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>View Bill</Link>
                   </td>
                 )}
-
-
               </tr>
             ))}
           </tbody>

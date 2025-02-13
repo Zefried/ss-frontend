@@ -89,7 +89,7 @@ export const ViewPendingTestPatients = () => {
               <th>Phone</th>
               <th>District</th>
               {
-                role !== 'admin'(
+                role !== 'admin' && (
                   <th>Actions</th>
                 )
               }
