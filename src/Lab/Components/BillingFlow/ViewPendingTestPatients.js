@@ -99,9 +99,15 @@ export const ViewPendingTestPatients = () => {
                 <td>{item.age}</td>
                 <td>{item.phone}</td>
                 <td>{item.district}</td>
-                <td>
-                  <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>View Bill</Link>
-                </td>
+
+                {
+                  role !== 'admin' && (
+                    <td>
+                    <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>View Bill</Link>
+                    </td>
+                  )
+                }
+               
               </tr>
             ))}
           </tbody>
