@@ -20,7 +20,7 @@ import '../src/assets/vendor/fontawesome-free/css/all.min.css';
 
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;  
-axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.baseURL = 'https://zefftest.shop/';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
