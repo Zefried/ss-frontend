@@ -41,6 +41,7 @@ import { ViewBillPdf } from './Lab/Components/BillingFlow/ViewBillPdf';
 import { ViewPendingTestPatients } from './Lab/Components/BillingFlow/ViewPendingTestPatients';
 import { LabHosDashboard } from './Dashboard/Labs/LabHosDashboard';
 import { AdminDashboard } from './Dashboard/Admin/AdminDashboard';
+import { UserDashboard } from './Dashboard/User/UserDashboard';
 
 function App() {
 
@@ -106,6 +107,7 @@ function App() {
 
 
         <Route path='user' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
+          <Route index element={<UserDashboard />} />
         
           {/* patient location registration request through user panel - routes starts from here  */}
           <Route path='add-patient-location' element={<AddPatientLocation/>} />

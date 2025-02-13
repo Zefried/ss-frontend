@@ -27,9 +27,10 @@ export const Home = () => {
         adminTabs = (
             <>
             <li className="nav-item active">
-                <a className="nav-link" href="index.html">
-                <i className="fas fa-fw fa-tachometer-alt" />
-                <span>Admin Dashboard</span></a>
+                <Link to='/admin' className="nav-link" >
+                    <i className="fas fa-fw fa-tachometer-alt" />
+                    <span>Admin Dashboard</span>
+                </Link>
             </li>
 
             <li className="nav-item">
@@ -153,7 +154,7 @@ export const Home = () => {
         labTabs = (
             <>
             <li className="nav-item active">
-                <Link to='/lab/view-lab-dashboard' className="nav-link" >
+                <Link to='/lab' className="nav-link" >
                     <i className="fas fa-fw fa-tachometer-alt" />
                     <span>Hospital | Lab Dashboard</span>
                 </Link>
