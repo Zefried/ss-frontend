@@ -101,7 +101,7 @@ export const ViewPendingTestPatients = () => {
                 <td>{item.district}</td>
 
                 {
-                  role !== 'admin' && (
+                  role === 'admin' && (
                     <td>
                     <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>View Bill</Link>
                     </td>
