@@ -5,6 +5,7 @@ import labIcon from '../../../../assets/img/lab/labIcon.jpg';
 import { customStateMethods } from '../../../../StateMng/Slice/AuthSlice';
 
 export const ViewTestCategory = () => {
+
     const token = customStateMethods.selectStateKey('appState', 'token');
     
     const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ export const ViewTestCategory = () => {
 
             try {
                 await axios.get('sanctum/csrf-cookie');
-                const res = await axios.get(`api/admin/lab-test/fetch-test-category/?page=${currentPage}&recordsPerPage=${recordsPerPage}`, {
+                const res = await axios.get(`api/admin/lab-test/fetch-test-category?page=${currentPage}&recordsPerPage=${recordsPerPage}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
