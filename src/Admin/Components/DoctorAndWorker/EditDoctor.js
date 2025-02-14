@@ -212,6 +212,7 @@ export const EditDoctor = () => {
 
                                                 <div className="form-floating mb-3 col-lg-6">
                                                     <input 
+                                                    disabled
                                                     type="text" 
                                                     className="form-control" 
                                                     id="phone" 
@@ -228,6 +229,7 @@ export const EditDoctor = () => {
 
                                                 <div className="form-floating mb-3 col-lg-6">
                                                     <input 
+                                                    disabled
                                                     type="email" 
                                                     className="form-control" 
                                                     id="email" 
@@ -409,10 +411,14 @@ export const EditDoctor = () => {
                                                 </>
                                 )}
 
-                                    
-                            <div className="d-flex justify-content-center">
-                                <button type="submit" onClick={updatingAdminDoctor} className="btn btn-outline-primary col-md-3">Submit</button>
-                            </div>
+                            {
+                                step === 3 && (
+                                    <div className="d-flex justify-content-center">
+                                    <button type="submit" onClick={updatingAdminDoctor} className="btn btn-outline-primary col-md-3">Submit</button>
+                                    </div>
+                                )
+                            }
+                          
                         
 
                         </div>

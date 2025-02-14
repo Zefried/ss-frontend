@@ -7,37 +7,37 @@ import patientIcon from '../../../assets/img/patient/patient.png';
 export const ViewAllPatient = () => {
   const token = customStateMethods.selectStateKey('appState', 'token');
   const role = customStateMethods.selectStateKey('appState', 'role');
-  
+
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [listData, setListData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null); // State to store selected item
 
-  useEffect(() => {
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
+  const [totalRecords, setTotalRecords] = useState(0);
 
+  // Fetch data with pagination
+  useEffect(() => {
     setLoading(true);
 
     axios.get('/api/user/patient-crud/view-patient', {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
+      params: {
+        page: currentPage,
+        recordsPerPage: recordsPerPage,
+      },
     })
-    .then(response => {
-      const data = response.data?.listData || [];
-      setListData(Array.isArray(data) ? data : []);
-    })
-    .catch(err => console.error(err))
-    .finally(() => setLoading(false));
-
-    const checkVisit = async () => {
-      const res = await axios.get('/api/user/patient-assign-flow/check-visit', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      console.log(res.data);
-    }
-
-    checkVisit();
-
-  }, [token]);
+      .then(response => {
+        const data = response.data?.listData || [];
+        setListData(Array.isArray(data) ? data : []);
+        setTotalRecords(response.data?.total || 0);
+      })
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, [token, currentPage, recordsPerPage]);
 
   const handleSearch = (e) => {
     setLoading(true);
@@ -45,20 +45,17 @@ export const ViewAllPatient = () => {
     const searchValue = e.target.value;
     setQuery(searchValue);
 
-    if(searchValue.length > 2) {
+    if (searchValue.length > 2) {
       axios.get('/api/user/patient-crud/search-patient', {
         params: { query: searchValue },
         headers: { Authorization: `Bearer ${token}` }
       })
-      .then(res => {
-        setSuggestions(res.data.results);
-        setLoading(false)
-      })
-      .catch(err => console.error(err) && setLoading(false));
+        .then(res => {
+          setSuggestions(res.data.results);
+          setLoading(false);
+        })
+        .catch(err => console.error(err) && setLoading(false));
     }
-  
-    
-
   };
 
   const handleSelectItem = (selected) => {
@@ -67,19 +64,39 @@ export const ViewAllPatient = () => {
     setQuery('');
   };
 
+  // Pagination functions
+  const handlePageClick = (page) => {
+    setCurrentPage(page);
+  };
 
-  
+  const handleRow = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value)) {
+      setRecordsPerPage(value);
+      setCurrentPage(1); // Reset to the first page when changing rows per page
+    }
+  };
+
+  const getPageCount = () => {
+    const totalPages = Math.ceil(totalRecords / recordsPerPage);
+    let pageCount = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageCount.push(i);
+    }
+    return pageCount;
+  };
+
   return (
     <div>
       {loading && <p>Loading...</p>}
       <input className='form-control' type='text' value={query} onChange={handleSearch} placeholder='Search...' />
-      
+
       {/* Search Suggestions */}
       <div className="list-group col-lg-4">
         {Array.isArray(suggestions) && suggestions.length > 0 ? (
           suggestions.map((s, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className="list-group-item list-group-item-action d-flex align-items-center mt-3"
               onClick={() => handleSelectItem(s)}
               style={{ cursor: "pointer" }}
@@ -122,15 +139,15 @@ export const ViewAllPatient = () => {
                 <td>{selectedItem.phone}</td>
                 <td>{selectedItem.district}</td>
                 <td>
-                  <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info </Link>
+                  <Link to={`/user/patient-full-Info/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info </Link>
                   <Link to={`/user/edit-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>Edit</Link>
                   {
-                      (role !== 'lab' && role !== 'hospital') && (
-                        <Link to={`/user/assign-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>
-                          Assign Test
-                        </Link>
-                      )
-                    }
+                    (role !== 'lab' && role !== 'hospital') && (
+                      <Link to={`/user/assign-patient/${selectedItem.id}`} className='btn btn-outline-success btn-sm mx-2'>
+                        Assign Test
+                      </Link>
+                    )
+                  }
 
                   <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
                   <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
@@ -146,9 +163,9 @@ export const ViewAllPatient = () => {
                   <td>{item.phone}</td>
                   <td>{item.district}</td>
                   <td>
-                    <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info</Link>
+                    <Link to={`/user/patient-full-Info/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Full Info</Link>
                     <Link to={`/user/edit-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>Edit</Link>
-                    
+
                     {
                       (role !== 'lab' && role !== 'hospital') && (
                         <Link to={`/user/assign-patient/${item.id}`} className='btn btn-outline-success btn-sm mx-2'>
@@ -156,7 +173,7 @@ export const ViewAllPatient = () => {
                         </Link>
                       )
                     }
-       
+
                     <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
                     <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
                   </td>
@@ -166,6 +183,35 @@ export const ViewAllPatient = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination UI */}
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <div>
+          <select className="form-select" onChange={handleRow} value={recordsPerPage}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <nav>
+          <ul className="pagination">
+            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+              <button className="page-link" onClick={() => handlePageClick(currentPage - 1)}>Previous</button>
+            </li>
+            {getPageCount().map((page) => (
+              <li key={page} className={`page-item ${page === currentPage ? 'active' : ''}`}>
+                <button className="page-link" onClick={() => handlePageClick(page)}>{page}</button>
+              </li>
+            ))}
+            <li className={`page-item ${currentPage === Math.ceil(totalRecords / recordsPerPage) ? 'disabled' : ''}`}>
+              <button className="page-link" onClick={() => handlePageClick(currentPage + 1)}>Next</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      
     </div>
   );
 };

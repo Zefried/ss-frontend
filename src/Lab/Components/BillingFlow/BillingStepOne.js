@@ -58,7 +58,15 @@ export const BillingStepOne = () => {
   };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const allowedTypes = ["application/pdf", "image/png", "image/jpeg"];
+      if (!allowedTypes.includes(selectedFile.type)) {
+        alert("Only PDF, PNG, or JPEG files are allowed.");
+        return;
+      }
+      setFile(selectedFile);
+    }
   };
 
   const handleSubmit = async () => {
@@ -74,6 +82,7 @@ export const BillingStepOne = () => {
     formData.append("discount", discount);
     formData.append("selected_employee", selectedEmployee);
     selectedTests.forEach((testId) => formData.append("selected_tests[]", testId));
+
     if (file) formData.append("file", file);
 
     try {
@@ -143,7 +152,12 @@ export const BillingStepOne = () => {
         <input type="number" className="form-control mb-2" value={finalAmount} readOnly />
 
         <label className="form-label">Upload File (Optional):</label>
-        <input type="file" className="form-control mb-2" onChange={handleFileChange} />
+        <input 
+          type="file" 
+          className="form-control mb-2" 
+          accept="application/pdf, image/png, image/jpeg" 
+          onChange={handleFileChange} 
+        />
 
         <button className="btn btn-primary mt-3" onClick={handleSubmit}>Submit Billing</button>
       </div>

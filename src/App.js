@@ -42,6 +42,8 @@ import { ViewPendingTestPatients } from './Lab/Components/BillingFlow/ViewPendin
 import { LabHosDashboard } from './Dashboard/Labs/LabHosDashboard';
 import { AdminDashboard } from './Dashboard/Admin/AdminDashboard';
 import { UserDashboard } from './Dashboard/User/UserDashboard';
+import { ViewEditPatient } from './User/Components/CRUD/ViewEditPatient';
+import { ViewPatientFullInfo } from './User/Components/CRUD/ViewPatientFullInfo';
 
 function App() {
 
@@ -51,7 +53,7 @@ function App() {
       
       
       <Routes>
-
+        <Route path='/' element={<AdminLogin/>} />
         <Route path='/admin-register' element={<AdminRegister />} />
         <Route path='/admin-login' element={<AdminLogin />} />
         <Route path='/user-login' element={<UserLogin />} />
@@ -116,6 +118,8 @@ function App() {
           {/* patient registration request through user panel - routes starts from here  */}
           <Route path='add-patient' element={<AddPatientRequest></AddPatientRequest>} />
           <Route path='view-patient' element={<ViewAllPatient></ViewAllPatient>} />
+          <Route path='edit-patient/:id' element={<ViewEditPatient></ViewEditPatient>} />
+          <Route path='patient-full-Info/:id' element={<ViewPatientFullInfo></ViewPatientFullInfo>} />
 
           {/* patient registration request through user panel - routes starts from here  */}
           <Route path='view-patient-card/:id' element={<PatientViewCard></PatientViewCard>} />

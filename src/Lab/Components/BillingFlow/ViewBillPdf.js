@@ -119,6 +119,15 @@ export const ViewBillPdf = () => {
     printWindow.print();
   };
 
+  // Function to handle viewing the bill file
+  const handleViewFile = (filePath) => {
+    const fileUrl = `http://localhost:8000/storage/${filePath}`; // Replace with your server URL
+    const newWindow = window.open(fileUrl, '_blank');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      alert('Unable to open the file. Please check the file path or your network connection.');
+    }
+  };
+
   if (loadingBill || loadingPatient) {
     return <div className="text-center mt-5">Loading...</div>;
   }
@@ -129,41 +138,7 @@ export const ViewBillPdf = () => {
 
   return (
     <div className="container mt-5">
-      <h3 className="text-primary mb-4">Patient Bill Details</h3>
-      {billData.length > 0 ? (
-        billData.map((bill, index) => (
-          <div key={bill.id} className="card shadow-sm mb-4">
-            <div className="card-body">
-              <div className="row">
-                <div className="col-md-6">
-                  <p><strong>Bill ID:</strong> {bill.id}</p>
-                  <p><strong>Invoice No:</strong> {bill.transaction_id}</p>
-                  <p><strong>Created At:</strong> {formatDate(bill.created_at)}</p>
-                </div>
-                <div className="col-md-6">
-                  <p><strong>Final Amount:</strong> {bill.final_amount}</p>
-                  <p><strong>Discount:</strong> {bill.discount}%</p>
-                  <p><strong>Tests:</strong> {bill.tests.join(', ')}</p>
-                </div>
-              </div>
-              <div className="mt-3">
-                <p><strong>Lab Name:</strong> {patientData?.data.employeeData[0].lab_name}</p>
-                <p><strong>Employee Name:</strong> {patientData?.data.employeeData[0].name}</p>
-              </div>
-              <button
-                className="btn btn-primary mt-3"
-                onClick={() => handlePrintBill(bill)}
-              >
-                Print Bill
-              </button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p className="text-muted">No bill data found.</p>
-      )}
-
-      <h3 className="text-primary mt-5 mb-4">Patient Details</h3>
+      <h3 className="text-primary mb-4 text-center">Patient Details</h3>
       {patientData ? (
         <div className="card shadow-sm">
           <div className="card-body">
@@ -173,8 +148,45 @@ export const ViewBillPdf = () => {
           </div>
         </div>
       ) : (
-        <p className="text-muted">No patient data found.</p>
+        <p className="text-muted text-center">No patient data found.</p>
+      )}
+    
+      <h3 className="text-primary mb-4 mt-5 text-center">Patient Bill Details</h3>
+      {billData.length > 0 ? (
+        billData.map((bill) => (
+          <div key={bill.id} className="card shadow-sm mb-4">
+            <div className="card-body">
+              <div className="row">
+                <div className="col-12 col-md-6 mb-3">
+                  <p><strong>Bill ID:</strong> {bill.id}</p>
+                  <p><strong>Invoice No:</strong> {bill.transaction_id}</p>
+                  <p><strong>Created At:</strong> {formatDate(bill.created_at)}</p>
+                </div>
+                <div className="col-12 col-md-6">
+                  <p><strong>Final Amount:</strong> {bill.final_amount}</p>
+                  <p><strong>Discount:</strong> {bill.discount}%</p>
+                  <p><strong>Tests:</strong> {bill.tests.join(', ')}</p>
+                </div>
+              </div>
+              <div className="mt-3">
+                <p><strong>Lab Name:</strong> {patientData?.data.employeeData[0].lab_name}</p>
+                <p><strong>Employee Name:</strong> {patientData?.data.employeeData[0].name}</p>
+              </div>
+              <div className="d-grid gap-2 d-md-flex mt-3">
+                <button className="btn btn-primary w-100" onClick={() => handlePrintBill(bill)}>
+                  Print Bill
+                </button>
+                <button className="btn btn-secondary w-100" onClick={() => handleViewFile(bill.bill_file)}>
+                  View Bill File
+                </button>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className="text-muted text-center">No bill data found.</p>
       )}
     </div>
+  
   );
 };

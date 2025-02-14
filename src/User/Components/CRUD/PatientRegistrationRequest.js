@@ -433,10 +433,14 @@ export const AddPatientRequest = () => {
                                             </>
                             )}
 
-                                
-                        <div className="d-flex justify-content-center">
-                            <button type="submit" onClick={requestPatientRegistration} className="btn btn-outline-primary col-md-3">Submit</button>
-                        </div>
+                         {
+                          step === 2 && (
+                            <div className="d-flex justify-content-center">
+                              <button type="submit" onClick={requestPatientRegistration} className="btn btn-outline-primary col-md-3">Submit</button>
+                            </div>
+                          )
+                         }       
+                     
                       
                       </div>
                     </form>

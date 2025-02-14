@@ -76,7 +76,7 @@ export const ViewPendingTestPatients = () => {
         </div>
       )}
 
-      <p className='h3 text-center mt-3'>View Paid Patients</p>
+      <p className='h3 text-center mt-3'>View Billed Patients</p>
       <p>Note: These pending patients may have incomplete tests. For example, a patient assigned three tests may have completed only two.</p>
       <div className='table-responsive'>
         <table className='table table-striped table-bordered'>

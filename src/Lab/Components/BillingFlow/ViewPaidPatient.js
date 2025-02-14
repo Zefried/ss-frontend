@@ -76,7 +76,7 @@ export const ViewPaidPatient = () => {
         </div>
       )}
 
-      <p className='h3 text-center mt-3'>View Paid Patients</p>
+      <p className='h3 text-center mt-3'>View Completed Patients</p>
       <div className='table-responsive'>
         <table className='table table-striped table-bordered'>
           <thead>
