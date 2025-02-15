@@ -44,6 +44,7 @@ import { AdminDashboard } from './Dashboard/Admin/AdminDashboard';
 import { UserDashboard } from './Dashboard/User/UserDashboard';
 import { ViewEditPatient } from './User/Components/CRUD/ViewEditPatient';
 import { ViewPatientFullInfo } from './User/Components/CRUD/ViewPatientFullInfo';
+import { ViewPendingAccounts } from './Admin/Components/DoctorAndWorker/ViewPendingAccounts';
 
 function App() {
 
@@ -71,6 +72,7 @@ function App() {
           {/* admin and worker route starts here */}
           <Route path='add-doctors' element={<AddDoctors/>}/>
           <Route path='view-doctors' element={<ViewDoctors/>}/>
+          <Route path='view-pending-accounts' element={<ViewPendingAccounts/>}/>
           <Route path='full-information/:id' element={<FullInformation/>}/>
           <Route path='doc-credentials/:id' element={<DocCredentials/>}/>
           <Route path='edit-doctor/:id' element={<EditDoctor/>}/>

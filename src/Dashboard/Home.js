@@ -67,7 +67,7 @@ export const Home = () => {
                     <Link className="collapse-item" to='/admin/add-doctors' >Add User</Link>
                     <Link className="collapse-item" to='/admin/view-doctors' >View User</Link>
                     <h6 className="collapse-header">Pending User Account</h6>
-                    <Link className="collapse-item" to='/admin/pending-accounts' >View Pending Accounts</Link>
+                    <Link className="collapse-item" to='/admin/view-pending-accounts' >View Pending Accounts</Link>
                 </div>
                 </div>
             </li>
