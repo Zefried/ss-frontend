@@ -22,6 +22,14 @@ export const AdminDashboard = () => {
     // Get the token from the state
     const token = customStateMethods.selectStateKey('appState', 'token');
 
+    // Format date to YYYY-MM-DD
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     // Fetch all data on component mount
     useEffect(() => {
         fetchAllData();
@@ -78,19 +86,21 @@ export const AdminDashboard = () => {
 
     // Fetch filtered data (assigned patients, billed patients, and revenue)
     const fetchFilteredData = async () => {
-        setLoading(true);
-        try {
-            if (!startDate || !endDate) {
-                setError('Please select both start and end dates.');
-                return;
-            }
+        // Early exit if startDate or endDate is not selected
+        if (!startDate || !endDate) {
+            alert('Please select both start and end dates.'); // Alert for validation
+            setError('Please select both start and end dates.');
+            return; // Exit the function early
+        }
 
+        setLoading(true); // Set loading state to true
+        try {
             // Fetch filtered assigned patients
             const assignedPatientsResponse = await axios.get('/api/admin/total-assigned-patients/filter', {
                 headers: { Authorization: `Bearer ${token}` },
                 params: {
-                    start_date: startDate.toISOString().split('T')[0],
-                    end_date: endDate.toISOString().split('T')[0],
+                    start_date: formatDate(startDate), // Use formatted date
+                    end_date: formatDate(endDate), // Use formatted date
                 },
             });
             setTotalAssignedPatients(assignedPatientsResponse.data.total);
@@ -99,8 +109,8 @@ export const AdminDashboard = () => {
             const billedPatientsResponse = await axios.get('/api/admin/total-billed-patients/filter', {
                 headers: { Authorization: `Bearer ${token}` },
                 params: {
-                    start_date: startDate.toISOString().split('T')[0],
-                    end_date: endDate.toISOString().split('T')[0],
+                    start_date: formatDate(startDate), // Use formatted date
+                    end_date: formatDate(endDate), // Use formatted date
                 },
             });
             setTotalBilledPatients(billedPatientsResponse.data.total);
@@ -109,8 +119,8 @@ export const AdminDashboard = () => {
             const revenueResponse = await axios.get('/api/admin/total-revenue/filter', {
                 headers: { Authorization: `Bearer ${token}` },
                 params: {
-                    start_date: startDate.toISOString().split('T')[0],
-                    end_date: endDate.toISOString().split('T')[0],
+                    start_date: formatDate(startDate), // Use formatted date
+                    end_date: formatDate(endDate), // Use formatted date
                 },
             });
             console.log('Filtered Revenue Response:', revenueResponse.data); // Debugging
@@ -118,9 +128,10 @@ export const AdminDashboard = () => {
             setTotalRevenue(filteredRevenue);
         } catch (err) {
             console.error(err);
+            alert('An error occurred while fetching filtered data'); // Alert for error handling
             setError('An error occurred while fetching filtered data');
         } finally {
-            setLoading(false);
+            setLoading(false); // Set loading state to false
         }
     };
 
@@ -131,7 +142,9 @@ export const AdminDashboard = () => {
 
     // Loading state
     if (loading) {
-        return <div className="text-center mt-5">Loading...</div>;
+        return <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </div>;
     }
 
     // Error state
@@ -142,7 +155,7 @@ export const AdminDashboard = () => {
     return (
         <div className="container mt-5">
             <div className="row mb-4">
-            <h1 className="text-center mb-4">Admin Dashboard Overview</h1>
+                <h1 className="text-center mb-4">Admin Dashboard Overview</h1>
                 {/* Card 1: Total Doctors and Workers */}
                 <div className="col-lg-4 mb-4">
                     <div className="card shadow-sm">
