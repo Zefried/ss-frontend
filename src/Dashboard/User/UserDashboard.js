@@ -59,21 +59,22 @@ export const UserDashboard = () => {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">User Dashboard</h1>
+
       <div className="row mb-3">
         <h4>Filter Revenue</h4>
-        <div className="col-md-5">
+        <div className="col-12 col-md-5 mb-2">
           <input type="date" className="form-control" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         </div>
-        <div className="col-md-5">
+        <div className="col-12 col-md-5 mb-2">
           <input type="date" className="form-control" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
         </div>
-        <div className="col-md-2">
+        <div className="col-12 col-md-2">
           <button className="btn btn-primary w-100" onClick={fetchRevenue}>Filter</button>
         </div>
       </div>
 
       <div className="row">
-        <div className="col-md-4 mb-4">
+        <div className="col-12 col-md-4 mb-4">
           <div className="card shadow-sm">
             <div className="card-body text-center">
               <h5 className="card-title text-primary">Total Assigned Patients</h5>
@@ -82,7 +83,7 @@ export const UserDashboard = () => {
           </div>
         </div>
 
-        <div className="col-md-4 mb-4">
+        <div className="col-12 col-md-4 mb-4">
           <div className="card shadow-sm">
             <div className="card-body text-center">
               <h5 className="card-title text-primary">Total Billed Patients</h5>
@@ -91,7 +92,7 @@ export const UserDashboard = () => {
           </div>
         </div>
 
-        <div className="col-md-4 mb-4">
+        <div className="col-12 col-md-4 mb-4">
           <div className="card shadow-sm">
             <div className="card-body text-center">
               <h5 className="card-title text-primary">Total Revenue</h5>
@@ -101,5 +102,6 @@ export const UserDashboard = () => {
         </div>
       </div>
     </div>
+
   );
 };

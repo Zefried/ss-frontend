@@ -5,6 +5,7 @@ import { customStateMethods } from '../../../StateMng/Slice/AuthSlice';
 import patientIcon from '../../../assets/img/patient/patient.png';
 
 export const ViewAllPatient = () => {
+
   const token = customStateMethods.selectStateKey('appState', 'token');
   const role = customStateMethods.selectStateKey('appState', 'role');
 
@@ -18,6 +19,7 @@ export const ViewAllPatient = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [totalRecords, setTotalRecords] = useState(0);
+  const [disable, setDisable] = useState(0);
 
   // Fetch data with pagination
   useEffect(() => {
@@ -86,6 +88,41 @@ export const ViewAllPatient = () => {
     return pageCount;
   };
 
+  function handleDisable(id) {
+    try {
+        setLoading(customStateMethods.spinnerDiv(true));
+
+        axios.get('sanctum/csrf-cookie').then(() => {
+            axios.get(`/api/admin/disable/patient/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then((res) => {
+                setLoading(false);
+
+                if (res.data.status === 200) {
+                    alert("Patient status updated successfully.");
+                    window.location.reload(); // Reload the page
+                } else {
+                    alert("Failed to update patient status.");
+                }
+            })
+            .catch(error => {
+                setLoading(false);
+                alert("An error occurred. Please try again.");
+                console.error(error);
+            });
+        });
+
+    } catch (error) {
+        setLoading(false);
+        alert("Unexpected error occurred.");
+        console.error(error);
+    }
+  }
+
+
+
+
   return (
     <div>
       {loading && <p>Loading...</p>}
@@ -150,7 +187,7 @@ export const ViewAllPatient = () => {
                   }
 
                   <Link to={`/user/view-patient-card/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
-                  <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
+                  <button className='btn btn-outline-danger btn-sm mx-2' onClick={ () => handleDisable(selectedItem.id)}>Disable</button>
                 </td>
               </tr>
             ) : (
@@ -175,7 +212,7 @@ export const ViewAllPatient = () => {
                     }
 
                     <Link to={`/user/view-patient-card/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>Patient Card</Link>
-                    <button className='btn btn-outline-danger btn-sm mx-2'>Disable</button>
+                    <button className='btn btn-outline-danger btn-sm mx-2' onClick={ () => handleDisable(item.id)} >Disable</button>
                   </td>
                 </tr>
               ))

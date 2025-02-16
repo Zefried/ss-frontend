@@ -47,6 +47,12 @@ import { ViewPatientFullInfo } from './User/Components/CRUD/ViewPatientFullInfo'
 import { ViewPendingAccounts } from './Admin/Components/DoctorAndWorker/ViewPendingAccounts';
 import { AdminLabRevenue } from './Dashboard/Admin/ExtraReportComponent/AdminLabRevenue';
 import { AdminLabEmployeeRevenue } from './Dashboard/Admin/ExtraReportComponent/AdminLabEmployeeRevenue';
+import { EnablePatient } from './Admin/Components/DisableEnable/EnablePatient';
+import { EnableUser } from './Admin/Components/DisableEnable/EnableUser';
+import { EnableLab } from './Admin/Components/DisableEnable/EnableLabs';
+import { EnableEmployee } from './Admin/Components/DisableEnable/EnableEmployee';
+import { EnableTestCategory } from './Admin/Components/DisableEnable/EnableTestCategory';
+import { EnableTests } from './Admin/Components/DisableEnable/EnableTests';
 
 function App() {
 
@@ -70,7 +76,19 @@ function App() {
           <Route path='lab-revenue' element={<AdminLabRevenue></AdminLabRevenue>} />
           <Route path='lab-employee-revenue' element={<AdminLabEmployeeRevenue></AdminLabEmployeeRevenue>} />
           
-          <Route path='test' element={<Test></Test>}></Route>
+          
+          {/* enable and disable routes starts here */}
+
+          <Route path='enable-patient' element={<EnablePatient></EnablePatient>} />
+          <Route path='enable-users' element={<EnableUser></EnableUser>} />
+          <Route path='enable-labs' element={<EnableLab></EnableLab>} />
+          <Route path='enable-employee' element={<EnableEmployee></EnableEmployee>} />
+          <Route path='enable-testCategory' element={<EnableTestCategory></EnableTestCategory>} />
+          <Route path='enable-tests' element={<EnableTests></EnableTests>} />
+
+
+
+          {/* enable and disable routes ends here */}
 
 
           {/* admin and worker route starts here */}
@@ -144,9 +162,14 @@ function App() {
           <Route path='view-paid-patients' element={<ViewPaidPatient></ViewPaidPatient>} />
           <Route path='view-paid-patient-bill/:id' element={<ViewBillPdf></ViewBillPdf>} />
           <Route path='view-pending-patients' element={<ViewPendingTestPatients></ViewPendingTestPatients>} />
-        
-        
         </Route>
+
+
+
+
+
+        
+
 
 
       </Routes>

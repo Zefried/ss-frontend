@@ -104,6 +104,12 @@ export const Home = () => {
                     <Link className="collapse-item" to='/lab/view-paid-patients' >View Paid Patients</Link>
                     <Link className="collapse-item" to='/lab/view-pending-patients' >View Pending Patients</Link>
                     
+                    <h6 className="collapse-header">Enable Patient Data:</h6>
+                    <Link className="collapse-item" to='/admin/enable-patient' >Enable Patients</Link>
+                    <Link className="collapse-item" to='/admin/enable-users' >Enable Doc & Worker</Link>
+                    <Link className="collapse-item" to='/admin/enable-labs' >Enable Labs</Link>
+
+
                 </div>
                 </div>
             </li>
@@ -193,7 +199,7 @@ export const Home = () => {
                     <div className="sidebar-brand-icon rotate-n-15">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </div>
-                    <div className="sidebar-brand-text mx-3">ERP<sup> Nxt Gen</sup></div>
+                    <div className="sidebar-brand-text mx-3">Jankalyan<sup></sup></div>
                     </a>
                     {/* Divider */}
                     <hr className="sidebar-divider my-0" />
@@ -297,7 +303,7 @@ export const Home = () => {
                             <i className="fa fa-bars" />
                             </button>
                             {/* Topbar Search */}
-                            <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            {/* <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div className="input-group">
                                 <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                                 <div className="input-group-append">
@@ -306,7 +312,7 @@ export const Home = () => {
                                 </button>
                                 </div>
                             </div>
-                            </form>
+                            </form> */}
                             {/* Topbar Navbar */}
                             <ul className="navbar-nav ml-auto">
                             {/* Nav Item - Search Dropdown (Visible Only XS) */}
@@ -329,13 +335,13 @@ export const Home = () => {
                                 </div>
                             </li>
                             {/* Nav Item - Alerts */}
-                            <li className="nav-item dropdown no-arrow mx-1">
+                                {/* <li className="nav-item dropdown no-arrow mx-1">
                                 <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i className="fas fa-bell fa-fw" />
-                                {/* Counter - Alerts */}
+                               
                                 <span className="badge badge-danger badge-counter">3+</span>
                                 </a>
-                                {/* Dropdown - Alerts */}
+           
                                 <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 className="dropdown-header">
                                     Alerts Center
@@ -375,15 +381,15 @@ export const Home = () => {
                                 </a>
                                 <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                                 </div>
-                            </li>
+                                </li> */}
                             {/* Nav Item - Messages */}
-                            <li className="nav-item dropdown no-arrow mx-1">
+                                {/* <li className="nav-item dropdown no-arrow mx-1">
                                 <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i className="fas fa-envelope fa-fw" />
-                                {/* Counter - Messages */}
+                          
                                 <span className="badge badge-danger badge-counter">7</span>
                                 </a>
-                                {/* Dropdown - Messages */}
+                      
                                 <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                                 <h6 className="dropdown-header">
                                     Message Center
@@ -434,28 +440,28 @@ export const Home = () => {
                                 </a>
                                 <a className="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                                 </div>
-                            </li>
+                                </li> */}
                             <div className="topbar-divider d-none d-sm-block" />
                             {/* Nav Item - User Information */}
                             <li className="nav-item dropdown no-arrow">
                                 <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="mr-2 d-none d-lg-inline text-gray-600 small">ABC Company</span>
-                                <img className="img-profile rounded-circle" src="https://static.toiimg.com/thumb/msid-102039189,imgsize-36132,width-400,resizemode-4/102039189.jpg" />
+                                <span className="mr-2 d-none d-lg-inline text-gray-600 small">Swastha Sewek</span>
+                                <img className="img-profile rounded-circle" src="https://jankalyan.webinfoghy.co.in/assets/img/logo.png" />
                                 </a>
                                 {/* Dropdown - User Information */}
                                 <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a className="dropdown-item" href="#">
-                                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
-                                    Profile
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-                                    Settings
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-                                    Activity Log
-                                </a>
+                                    {/* <a className="dropdown-item" href="#">
+                                        <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
+                                        Profile
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
+                                        Settings
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
+                                        Activity Log
+                                    </a> */}
                                 <div className="dropdown-divider" />
                                 <a onClick={logOut} className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />

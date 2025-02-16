@@ -143,7 +143,7 @@ export const ViewPendingTestPatients = () => {
               <th>Age</th>
               <th>Phone</th>
               <th>District</th>
-              {role !== 'admin' && <th>Actions</th>}
+              {role !== 'admin' && role !== 'user' && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -155,7 +155,7 @@ export const ViewPendingTestPatients = () => {
                 <td>{selectedItem.age}</td>
                 <td>{selectedItem.phone}</td>
                 <td>{selectedItem.district}</td>
-                {role !== 'admin' && (
+                {role !== 'admin' && role !== 'user' && (
                   <td>
                     <Link to={`/lab/view-paid-patient-bill/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>
                       View Bill
@@ -172,13 +172,14 @@ export const ViewPendingTestPatients = () => {
                   <td>{item.age}</td>
                   <td>{item.phone}</td>
                   <td>{item.district}</td>
-                  {role !== 'admin' && (
+                  {role !== 'admin' && role !== 'user' && (
                     <td>
-                      <Link to={`/lab/view-paid-patient-bill/${item.id}`} className='btn btn-outline-primary btn-sm mx-2'>
+                      <Link to={`/lab/view-paid-patient-bill/${selectedItem.id}`} className='btn btn-outline-primary btn-sm mx-2'>
                         View Bill
                       </Link>
                     </td>
                   )}
+
                 </tr>
               ))
             )}
