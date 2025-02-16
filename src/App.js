@@ -45,6 +45,8 @@ import { UserDashboard } from './Dashboard/User/UserDashboard';
 import { ViewEditPatient } from './User/Components/CRUD/ViewEditPatient';
 import { ViewPatientFullInfo } from './User/Components/CRUD/ViewPatientFullInfo';
 import { ViewPendingAccounts } from './Admin/Components/DoctorAndWorker/ViewPendingAccounts';
+import { AdminLabRevenue } from './Dashboard/Admin/ExtraReportComponent/AdminLabRevenue';
+import { AdminLabEmployeeRevenue } from './Dashboard/Admin/ExtraReportComponent/AdminLabEmployeeRevenue';
 
 function App() {
 
@@ -65,6 +67,8 @@ function App() {
         {/* Admin Protected Routes starts from here */}
         <Route path='admin' element={<AdminGuard><Home></Home></AdminGuard>}>
           <Route index element={<AdminDashboard />} />
+          <Route path='lab-revenue' element={<AdminLabRevenue></AdminLabRevenue>} />
+          <Route path='lab-employee-revenue' element={<AdminLabEmployeeRevenue></AdminLabEmployeeRevenue>} />
           
           <Route path='test' element={<Test></Test>}></Route>
 
