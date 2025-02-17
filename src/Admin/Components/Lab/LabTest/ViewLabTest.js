@@ -183,8 +183,8 @@ export const ViewLabTest = () => {
  
             if (suggestions && suggestions.length > 0) {
                 userCard = suggestions.map(({ name, id, }) => (
-                    <ul className="row list-group" key={id} onClick={() => handleSuggestionClick(name, id)} style={{ cursor: 'pointer' }}>
-                        <li className="list-group-item col-md-6 text-dark mt-3 mx-4">
+                    <ul className="row list-group w-100" key={id} onClick={() => handleSuggestionClick(name, id)} style={{ cursor: 'pointer' }}>
+                        <li className="list-group-item col-12 col-md-6 text-dark mt-3 mx-md-4">
                             <strong>id:</strong> {id} | <strong>Test Name:</strong> {name}
                         </li>
                     </ul>
@@ -225,17 +225,17 @@ export const ViewLabTest = () => {
 
             {
                 selected && (
-                    <div className='row col-4 mt-4 mx-2'>
-                        <div className='card'>
-                            <h4 className='mt-4 text-center'>Selected</h4>
+                    <div className='row col-12 col-md-4 mt-4 mx-2'>
+                        <div className='card p-3'>
+                            <h4 className='mt-3 text-center'>Selected</h4>
                             <p><strong>Test Id:</strong> {selected.id}</p>
                             <p><strong>Test Name:</strong> {selected.name}</p>  
-                            <td className='text-center m-3'>
+                            <div className='text-center my-2'>
                                 <button className='btn btn-outline-danger btn-sm'>Disable</button>
-                            </td>
-                            <td className='text-center mb-1'>
+                            </div>
+                            <div className='text-center my-2'>
                                 <Link className='btn btn-outline-primary btn-md' to={`/admin/edit-lab-test/${selected.id}`}>Edit</Link>
-                            </td>
+                            </div>
                         </div>
                     </div>
             

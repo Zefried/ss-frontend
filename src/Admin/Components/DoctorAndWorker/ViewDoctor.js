@@ -246,45 +246,46 @@ export const ViewDoctors = () => {
           } 
         
           if (!selected) {
-                suggestionJSX = (
-                    <p className='m-3 mx-4 text-dark'>No Suggestions...</p>
-                );
-            } else {
-            suggestionJSX = '';
-            selectedOneItemJsx = (
-                <tr key={selected.id}>
-                    <td>{selected.id}</td> 
-                    <td>
-                        <img style={{ height:'40px', width:'40px'}} className='userIcon' src={userIcon} alt="User Icon" />
-                    </td>
-                    <td>{selected.name}</td> 
-                    <td>{selected.workDistrict}</td>
-                    <td>{selected.sex}</td>
-                    <td>{selected.phone}</td>
-                    <td>{selected.email}</td>
-                    <td>
-                        <Link to={`/admin/edit-doctor/${selected.id}`} className='btn btn-outline-success btn-sm'>
-                            Edit
-                        </Link>
-                    </td>
-                    <td>
-                        <Link to={`/admin/doc-credentials/${selected.id}`} className='btn btn-outline-primary btn-sm'>
-                            Credentials
-                        </Link>
-                    </td>
-                    <td>
-                        <Link to={`/admin/full-information/${selected.id}`} className='btn btn-outline-primary btn-sm'>
-                            Full Info
-                        </Link>
-                    </td>
-                    <td>
-                        <button className='btn btn-outline-danger btn-sm' onClick={() => handleDisable(selected.id)}>
-                            Disable
-                        </button>
-                    </td>
-                </tr>
+            suggestionJSX = (
+                <p className='m-3 mx-4 text-dark'>No Suggestions...</p>
             );
-          }
+            } else {
+                suggestionJSX = '';
+                selectedOneItemJsx = (
+                    <tr key={selected.id} className="text-center">
+                        <td>{selected.id}</td> 
+                        <td>
+                            <img style={{ height: '40px', width: '40px' }} className='userIcon img-fluid' src={userIcon} alt="User Icon" />
+                        </td>
+                        <td>{selected.name}</td> 
+                        <td>{selected.workDistrict}</td>
+                        <td>{selected.sex}</td>
+                        <td>{selected.phone}</td>
+                        <td className="text-truncate" style={{ maxWidth: '150px' }}>{selected.email}</td>
+                        <td>
+                            <Link to={`/admin/edit-doctor/${selected.id}`} className='btn btn-outline-success btn-sm w-100'>
+                                Edit
+                            </Link>
+                        </td>
+                        <td>
+                            <Link to={`/admin/doc-credentials/${selected.id}`} className='btn btn-outline-primary btn-sm w-100'>
+                                Credentials
+                            </Link>
+                        </td>
+                        <td>
+                            <Link to={`/admin/full-information/${selected.id}`} className='btn btn-outline-primary btn-sm w-100'>
+                                Full Info
+                            </Link>
+                        </td>
+                        <td>
+                            <button className='btn btn-outline-danger btn-sm w-100' onClick={() => handleDisable(selected.id)}>
+                                Disable
+                            </button>
+                        </td>
+                    </tr>
+                );
+        }
+        
 
            //////// Search Module Custom JSX ends here
     

@@ -162,7 +162,7 @@ export const ViewAssignedTest = () => {
                   <th>Phone</th>
                   <th>District</th>
                   <th>Assigned Tests</th>
-                  <th>Actions</th>
+                  {/* <th>Actions</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -176,9 +176,9 @@ export const ViewAssignedTest = () => {
                     <td>
                       <button className="btn btn-info btn-sm" onClick={() => handleShowTests(item.tests)}>View Tests</button>
                     </td>
-                    <td>
+                    {/* <td>
                       <button className="btn btn-outline-danger btn-sm mx-2">Delete</button>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

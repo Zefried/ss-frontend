@@ -321,13 +321,12 @@ export const AddLabUser = () => {
          
 
     return (
-        <div>
+        <div className="container">
 
         {/* loading UI starts here */}
             {loading}
             {messages}
         {/* ends here */}
-
 
         {/* Search module UI starts here  */}
 
@@ -336,48 +335,40 @@ export const AddLabUser = () => {
             value={query}
             onChange={handleSearch}
             placeholder="Search by phone or unique ID"
-            className="mx-4 form-control col-md-7 mt-3"
+            className="mx-4 form-control col-12 col-md-7 mt-3"
             />
 
-          
             {userCard}
             {suggestionJSX}
-         
 
             {
                 selected && (
-                    <div className='row col-4 mt-4 mx-2'>
-                        <div className='card'>
+                    <div className='row col-12 col-md-4 mt-4 mx-2'>
+                        <div className='card p-3'>
                             <h4 className='mt-4 text-center'>Selected</h4>
                             <p><strong>Email:</strong> {selected.email}</p>
                             <p><strong>Location:</strong> {selected.workDistrict}</p>
                             <p><strong>Phone:</strong> {selected.phone}</p>  
                         </div>
-
-                      
                     </div>
-            
                 )       
             }
 
         {/* Search module UI ends here */}
 
-
-            
-
         {/* pagination UI starts from here */}
 
             <div className="container mt-5">
                 <div className='drop-down mt-5'>
-                    <select class="form-select col-3" aria-label="Default select example"onClick={handleRow} >
+                    <select class="form-select col-12 col-md-3" aria-label="Default select example" onClick={handleRow} >
                         <option defaultValue={"5"} >Select Row</option>
                         <option value="5">05</option>
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
-                        <option value="100">500</option>
-                        <option value="100">1000</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
                     </select>
                 </div>
 
@@ -401,7 +392,6 @@ export const AddLabUser = () => {
                     </table>
                 </div>
 
-                
                 {
                     !selected && listData.items && listData.items.length > 0 && (
                         
@@ -438,18 +428,10 @@ export const AddLabUser = () => {
 
                     )
                 }
-
-
-
-
-                    
             </div>
 
-
         {/* pagination UI ends here */}
-
-
-
         </div>
+
     )
 }

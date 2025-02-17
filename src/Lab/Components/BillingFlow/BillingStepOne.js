@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { customStateMethods } from "../../../StateMng/Slice/AuthSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const BillingStepOne = () => {
   const { id } = useParams();
   const token = customStateMethods.selectStateKey("appState", "token");
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [patientData, setPatientData] = useState(null);
@@ -94,6 +95,7 @@ export const BillingStepOne = () => {
       });
 
       alert("Billing submitted successfully!");
+      navigate('/lab/view-pending-patients');
     } catch (error) {
       console.error("Error submitting billing:", error);
       alert("Failed to submit billing.");

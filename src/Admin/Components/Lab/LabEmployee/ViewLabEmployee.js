@@ -284,91 +284,72 @@ export const ViewLabEmployee = () => {
           let userCard = '';
           let suggestionJSX = '';
           let filteredJsx = '';
-
-
+          
           if (suggestions && suggestions.length > 0) {
               userCard = suggestions.map(({ id, phone, email, name, district }) => (
                   <ul className="row list-group" key={id} onClick={() => handleSuggestionClick(id, phone, email, name, district)} style={{ cursor: 'pointer' }}>
-                      <li className="list-group-item col-md-6 text-dark mt-3 mx-4">
+                      <li className="list-group-item col-12 col-md-6 text-dark mt-3 mx-auto">
                           <strong>Name:</strong> {name} | <strong>Phone:</strong> {phone} | <strong>District:</strong> {district}
                       </li>
                   </ul>
               ));
           } 
-        
+          
           if (!selected) {
-            suggestionJSX = (
-                <p className='m-3 mx-4 text-dark'>No Suggestions...</p>
-            );
-        } else {
-            suggestionJSX = '';
-
-            if(filterData){
-
-                filteredJsx = filterData.map((filterData, index) =>(
-
-                    <tr key={filterData.id}>
-                        <td>{index + 1}</td> 
-                        <td>
-                            <img style={{ height:'40px', width:'40px'}} className='userIcon' src={userIcon} alt="User Icon" />
-                        </td>
-                        <td>{filterData.name}</td> 
-                        <td>{filterData.lab_name}</td>
-                        <td>{filterData.lab_location}</td>
-                        <td>{filterData.phone}</td>
-                        
-                        <td>
-                                <button className='btn btn-outline-danger btn-sm' onClick={() => handleDisable(filterData.id)}>Disable</button>
-                        </td>
-                    </tr>
-                )); 
-            } else{
-                let messages = 'Network issue, please fix the network';
-                customStateMethods.getAlertDiv(messages)
-            }
-        
-        }
-
-           //////// Search Module Custom JSX ends here
-    
-
-
-
-          //////// List data view custom jsx starts here
-
-            let listDataView = '';
-
-            if (listData.items && listData.items.length > 0) {
-                listDataView = listData.items.map((item, index) => (
-                    <tr key={item.id}>
-                        <td>{index + 1}</td>
-                        <td>
-                            <img style={{ height:'40px', width:'40px'}} className='userIcon' src={userIcon} alt="User Icon" />
-                        </td>
-                        <td>{item.name}</td>
-                        <td>{item.lab_name}</td>
-                        <td>{item.lab_location}</td>
-                        <td>{item.phone}</td>
-           
-                        <td>
-                            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDisable(item.id)}>Disable</button>
-                        </td>
-                    </tr>
-                ));
-            } else {
-                
-                listDataView = (
-                    <tr>
-                        <td colSpan="12" className="text-center">No data available</td>
-                    </tr>
-                );
-            }
-                
-          //////// List data view custom jsx ends here
-
-    // ends here
-         
-
+              suggestionJSX = (
+                  <p className='m-3 text-dark text-center'>No Suggestions...</p>
+              );
+          } else {
+              suggestionJSX = '';
+          
+              if (filterData) {
+                  filteredJsx = filterData.map((filterData, index) => (
+                      <tr key={filterData.id}>
+                          <td>{index + 1}</td>
+                          <td>
+                              <img style={{ height: '40px', width: '40px' }} className='userIcon img-fluid' src={userIcon} alt="User Icon" />
+                          </td>
+                          <td>{filterData.name}</td>
+                          <td>{filterData.lab_name}</td>
+                          <td>{filterData.lab_location}</td>
+                          <td>{filterData.phone}</td>
+                          <td>
+                              <button className='btn btn-outline-danger btn-sm' onClick={() => handleDisable(filterData.id)}>Disable</button>
+                          </td>
+                      </tr>
+                  ));
+              } else {
+                  let messages = 'Network issue, please fix the network';
+                  customStateMethods.getAlertDiv(messages);
+              }
+          }
+          
+          let listDataView = '';
+          
+          if (listData.items && listData.items.length > 0) {
+              listDataView = listData.items.map((item, index) => (
+                  <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>
+                          <img style={{ height: '40px', width: '40px' }} className='userIcon img-fluid' src={userIcon} alt="User Icon" />
+                      </td>
+                      <td>{item.name}</td>
+                      <td>{item.lab_name}</td>
+                      <td>{item.lab_location}</td>
+                      <td>{item.phone}</td>
+                      <td>
+                          <button className='btn btn-outline-danger btn-sm' onClick={() => handleDisable(item.id)}>Disable</button>
+                      </td>
+                  </tr>
+              ));
+          } else {
+              listDataView = (
+                  <tr>
+                      <td colSpan="7" className="text-center">No data available</td>
+                  </tr>
+              );
+          }
+          
     return (
         <div>
 
@@ -416,83 +397,67 @@ export const ViewLabEmployee = () => {
 
         {/* pagination UI starts from here */}
 
-            <div className="container mt-5">
-                <div className='drop-down mt-5'>
-                    <select class="form-select col-3" aria-label="Default select example"onClick={handleRow} >
-                        <option defaultValue={"5"} >Select Row</option>
-                        <option value="5">05</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="100">500</option>
-                        <option value="100">1000</option>
-                    </select>
-                </div>
+        <div className="container mt-5">
+    <div className='drop-down mt-5'>
+        <select className="form-select col-12 col-sm-6 col-md-3" aria-label="Default select example" onClick={handleRow}>
+            <option defaultValue={"5"}>Select Row</option>
+            <option value="5">05</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+        </select>
+    </div>
 
-                <h3 className="text-center mb-4">Employee Associated with <strong>{selected && selected.name ? selected.name : 'Lab | Hospital'}</strong></h3>
-                <div className="table-responsive">
-                    <table className="table table-bordered table-striped table-hover">
-                        <thead className="table-dark">
-                        <tr>
-                            <th>S.No</th>
-                            <th>Profile</th>
-                            <th>Employee Name</th>
-                            <th>Lab/Hospital</th>
-                            <th>Location</th>
-                            <th>Phone</th>
-                            <th>Disable</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                         {!selected ? listDataView : filteredJsx}
-                        </tbody>
-                    </table>
-                </div>
+    <h3 className="text-center mb-4">Employee Associated with <strong>{selected && selected.name ? selected.name : 'Lab | Hospital'}</strong></h3>
+    
+    <div className="table-responsive">
+        <table className="table table-bordered table-striped table-hover">
+            <thead className="table-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Profile</th>
+                    <th>Employee Name</th>
+                    <th>Lab/Hospital</th>
+                    <th>Location</th>
+                    <th>Phone</th>
+                    <th>Disable</th>
+                </tr>
+            </thead>
+            <tbody>
+                {!selected ? listDataView : filteredJsx}
+            </tbody>
+        </table>
+    </div>
 
-                
-                {
-                    !selected && listData.items && listData.items.length > 0 && (
-                        
-                        <nav aria-label="Page navigation example">
-                            <ul className="pagination justify-content-center">
-                                <li className={`${currentPage === 1 ? 'disabled' : 'active'}`}>
-                                    <a
-                                        className="page-link"
-                                        onClick={() => currentPage > 1 && handlePageClick(currentPage - 1)}
-                                    >
-                                        Previous
-                                    </a>
-                                </li>
-                                {getPageCount().map((page) => (
-                                    <li
-                                        key={page}
-                                        className={`page-item ${page === currentPage ? 'active' : ''}`}
-                                    >
-                                        <a className="page-link" onClick={() => handlePageClick(page)}>
-                                            {page === getPageCount().length ? `...${page}` : page}
-                                        </a>
-                                    </li>
-                                ))}
-                                <li className={`${currentPage === totalPages ? 'disabled' : 'active'}`}>
-                                    <a
-                                        className="page-link"
-                                        onClick={() => currentPage < totalPages && handlePageClick(currentPage + 1)}
-                                    >
-                                        Next
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                    )
-                }
-
-
-
-
-                    
-            </div>
+    {
+        !selected && listData.items && listData.items.length > 0 && (
+            <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-center">
+                    <li className={`${currentPage === 1 ? 'disabled' : 'active'}`}>
+                        <a className="page-link" onClick={() => currentPage > 1 && handlePageClick(currentPage - 1)}>
+                            Previous
+                        </a>
+                    </li>
+                    {getPageCount().map((page) => (
+                        <li key={page} className={`page-item ${page === currentPage ? 'active' : ''}`}>
+                            <a className="page-link" onClick={() => handlePageClick(page)}>
+                                {page === getPageCount().length ? `...${page}` : page}
+                            </a>
+                        </li>
+                    ))}
+                    <li className={`${currentPage === totalPages ? 'disabled' : 'active'}`}>
+                        <a className="page-link" onClick={() => currentPage < totalPages && handlePageClick(currentPage + 1)}>
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        )
+    }
+        </div>
 
 
         {/* pagination UI ends here */}

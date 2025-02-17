@@ -53,9 +53,11 @@ import { EnableLab } from './Admin/Components/DisableEnable/EnableLabs';
 import { EnableEmployee } from './Admin/Components/DisableEnable/EnableEmployee';
 import { EnableTestCategory } from './Admin/Components/DisableEnable/EnableTestCategory';
 import { EnableTests } from './Admin/Components/DisableEnable/EnableTests';
+import { customStateMethods } from './StateMng/Slice/AuthSlice';
 
 function App() {
-
+  const role = customStateMethods.selectStateKey('appState', 'role');
+  
   return (
     <div className="App">
       
@@ -154,15 +156,21 @@ function App() {
         </Route>
 
 
-  
 
-        <Route path='lab' element={<DocWorkerGuard><Home></Home></DocWorkerGuard>}>
-          <Route index element={<LabHosDashboard />} />
-          <Route path='billing-step-one/:id' element={<BillingStepOne></BillingStepOne>} />
-          <Route path='view-paid-patients' element={<ViewPaidPatient></ViewPaidPatient>} />
-          <Route path='view-paid-patient-bill/:id' element={<ViewBillPdf></ViewBillPdf>} />
-          <Route path='view-pending-patients' element={<ViewPendingTestPatients></ViewPendingTestPatients>} />
-        </Route>
+
+          <Route
+            path="lab" element={ <DocWorkerGuard> <Home /> </DocWorkerGuard>}>
+
+            {role === "user" ? (
+              <Route index element={<UserDashboard />} />
+            ) : (
+              <Route index element={<LabHosDashboard />} />
+            )}
+            <Route path="billing-step-one/:id" element={<BillingStepOne />} />
+            <Route path="view-paid-patients" element={<ViewPaidPatient />} />
+            <Route path="view-paid-patient-bill/:id" element={<ViewBillPdf />} />
+            <Route path="view-pending-patients" element={<ViewPendingTestPatients />} />
+          </Route>
 
 
 

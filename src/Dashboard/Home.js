@@ -138,9 +138,10 @@ export const Home = () => {
         userTabs = (
             <>
             <li className="nav-item active">
-                <a className="nav-link" href="index.html">
-                <i className="fas fa-fw fa-tachometer-alt" />
-                <span>User Dashboard</span></a>
+                <Link to='/user' className="nav-link" >
+                    <i className="fas fa-fw fa-tachometer-alt" />
+                    <span>User Dashboard</span>
+                </Link>
             </li>
 
 

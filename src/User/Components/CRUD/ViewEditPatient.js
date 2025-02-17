@@ -275,7 +275,6 @@ export const ViewEditPatient = () => {
 
                     <div className="form-floating mb-3 col-lg-6">
                       <input
-                        disabled
                         type="text"
                         className="form-control"
                         id="phone"

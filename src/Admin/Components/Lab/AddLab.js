@@ -173,178 +173,90 @@ export const AddLab = () => {
             <div className="container mt-5">
                 <div className="card shadow-lg border-0 rounded-4" id='doc-bg'>
                     <div className="card-body p-4">
-                    <h3 className="text-center mb-4">Lab - Hospital Registration {step}</h3>
-                    {messages}
-                    {loading}
-                
-                       
-                        <form >
-                        <div className="row">
-
-                        {/* Step 1: Lab Information */}
-                        {step === 1 && (
-                        <>
-                        <h5 className="text-center mb-4">Lab - Hospital Information</h5>
-
-                        <div className="form-floating mb-3 col-lg-6">
-                            <select className="form-control" id="profession" name="profession" value={formData.profession} onChange={handleChange} >
-                                <option value="">Select Profession ? </option>
-                                <option value="lab">Lab</option>
-                                <option value="hospital">Hospital</option>
-                            </select>
-                            <label htmlFor="profession" className="mx-1">Profession</label>
-                            <span style={{ color: 'orange' }}>
-                                {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.profession : ''}
-                            </span>
-                        </div>                        
-
-
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" />
-                        <label htmlFor="name" className='mx-1'>Name of Lab/Hospital</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.name : ''}
-                        </span>
-                        </div>
-
-
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="text"
-                        className="form-control"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Phone Number"
-                        />
-                        <label htmlFor="phone" className='mx-1'>Phone Number</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.phone : ''}
-                        </span>
-                        </div>
-
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Email"
-                        />
-                        <label htmlFor="email" className='mx-1'>Email Address</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.email : ''}
-                        </span>
-                        </div>
-
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="text"
-                        className="form-control"
-                        id="registrationNo"
-                        name="registrationNo"
-                        value={formData.registrationNo}
-                        onChange={handleChange}
-                        placeholder="Registration Number"
-                        />
-                        <label htmlFor="registrationNo" className='mx-1'>Registration Number</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.registrationNo : ''}
-                        </span>
-                        </div>
-
-                        </>
-                        )}
-
-                        {/* Step 3: Working Address Information */}
-                        {step === 2 && (
-                        <>
-                        <h5 className="text-center mb-4">Working Address</h5>
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="text"
-                        className="form-control"
-                        id="buildingNo"
-                        name="buildingNo"
-                        value={formData.buildingNo}
-                        onChange={handleChange}
-                        placeholder="Building Number"
-                        />
-                        <label htmlFor="buildingNo" className='mx-1'>Building Number, Block, and Road Address</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.buildingNo : ''}
-                        </span>
-                        </div>
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="text"
-                        className="form-control"
-                        id="landmark"
-                        name="landmark"
-                        value={formData.landmark}
-                        onChange={handleChange}
-                        placeholder="Landmark"
-                        />
-                        <label htmlFor="landmark" className='mx-1'>Landmark</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.landmark : ''}
-                        </span>
-                        </div>
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="text"
-                        className="form-control"
-                        id="workDistrict"
-                        name="workDistrict"
-                        value={formData.workDistrict}
-                        onChange={handleChange}
-                        placeholder="District"
-                        />
-                        <label htmlFor="workDistrict" className='mx-1'>District</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.workDistrict : ''}
-                        </span>
-                        </div>
-                        <div className="form-floating mb-3 col-lg-6">
-                        <input
-                        type="text"
-                        className="form-control"
-                        id="state"
-                        name="state"
-                        value={formData.state}
-                        onChange={handleChange}
-                        placeholder="State"
-                        />
-                        <label htmlFor="state" className='mx-1'>State</label>
-                        <span style={{ color: 'orange' }}>
-                        {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.state : ''}
-                        </span>
-                        </div>
-                        </>
-                        )}
+                        <h3 className="text-center mb-4">Lab - Hospital Registration {step}</h3>
+                        {messages}
+                        {loading}
+                        <form>
+                            <div className="row g-3"> {/* Added g-3 for better spacing */}
+                                {/* Step 1: Lab Information */}
+                                {step === 1 && (
+                                    <>
+                                        <h5 className="text-center mb-4">Lab - Hospital Information</h5>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <select className="form-control" id="profession" name="profession" value={formData.profession} onChange={handleChange}>
+                                                <option value="">Select Profession ? </option>
+                                                <option value="lab">Lab</option>
+                                                <option value="hospital">Hospital</option>
+                                            </select>
+                                            <label htmlFor="profession" className="mx-1">Profession</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.profession || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" />
+                                            <label htmlFor="name" className='mx-1'>Name of Lab/Hospital</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.name || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" />
+                                            <label htmlFor="phone" className='mx-1'>Phone Number</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.phone || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="email" className="form-control" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+                                            <label htmlFor="email" className='mx-1'>Email Address</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.email || ''}</span>
+                                        </div>
+                                    </>
+                                )}
+                                {/* Step 2: Working Address Information */}
+                                {step === 2 && (
+                                    <>
+                                     <h5 className="text-center mb-4">Working Address</h5>
+                                 
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="buildingNo" name="buildingNo" value={formData.buildingNo} onChange={handleChange} placeholder="Building Number" />
+                                            <label htmlFor="buildingNo" className='mx-1'>Building Number, Block, and Road Address</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.buildingNo || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="landmark" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" />
+                                            <label htmlFor="landmark" className='mx-1'>Landmark</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.landmark || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="state" name="state" value={formData.state} onChange={handleChange} placeholder="State" />
+                                            <label htmlFor="state" className='mx-1'>State</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.state || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="workDistrict" name="workDistrict" value={formData.workDistrict} onChange={handleChange} placeholder="Work District" />
+                                            <label htmlFor="workDistrict" className='mx-1'>Work District</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.workDistrict || ''}</span>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6">
+                                            <input type="text" className="form-control" id="registrationNo" name="registrationNo" value={formData.registrationNo} onChange={handleChange} placeholder="Registration No" />
+                                            <label htmlFor="registrationNo" className='mx-1'>Registration No</label>
+                                            <span style={{ color: 'orange' }}>{serverResponse?.validation_error?.registrationNo || ''}</span>
+                                        </div>
 
 
-                        <div className="d-flex justify-content-center">
-                        {step > 1 && ( <><button type="button" onClick={submitFormData} className="btn btn-outline-primary col-md-3">Submit</button></>)}
-                        </div>
-
-                        </div>
+                                    </>
+                                )}
+                                <div className="d-flex justify-content-center">
+                                    {step > 1 && (<button type="button" onClick={submitFormData} className="btn btn-outline-primary col-6 col-md-3">Submit</button>)}
+                                </div>
+                            </div>
                         </form>
-                
-                    
-                    {/* Navigation Buttons */}
-                    <div className="d-flex justify-content-between mt-4">
-                        {step > 1 && <button className="btn btn-secondary" onClick={prevStep}>Previous</button>}
-                        {step < 2 && <button className="btn btn-primary" onClick={nextStep}>Next</button>}
-                    </div>
+                        {/* Navigation Buttons */}
+                        <div className="d-flex justify-content-between mt-4">
+                            {step > 1 && <button className="btn btn-secondary" onClick={prevStep}>Previous</button>}
+                            {step < 2 && <button className="btn btn-primary" onClick={nextStep}>Next</button>}
+                        </div>
                     </div>
                 </div>
             </div>
-
         )
+        
 
         //////// Ends here
 
