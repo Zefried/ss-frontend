@@ -58,45 +58,67 @@ export const EditDoctor = () => {
 
     function updatingAdminDoctor(e) {
         e.preventDefault();
-
+    
         setLoading(customStateMethods.spinnerDiv(true));
-
+    
         try {
+            axios.get('sanctum/csrf-cookie').then(response => {
+                axios.post(`api/admin/doctors/update-doctor/${id}`, docOldData, {
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        Authorization: `Bearer ${token}` 
+                    }
+                })
+                .then((res) => {
+                    // Update server response state
+                    setServerResponse((prevData) => ({
+                        ...prevData, 
+                        validation_error: res.data.validation_error || {}, 
+                        message: res.data.message || {}, 
+                        error: res.data.error || {}
+                    }));
     
-        axios.get('sanctum/csrf-cookie').then(response => {
-            axios.post(`api/admin/doctors/update-doctor/${id}`, docOldData, {
-                headers: { 'Content-Type': 'application/json', 
-                    Authorization:`Bearer ${token}` 
-                }
-            })
-            .then((res) => {
-                
-                setServerResponse((prevData)=>(
-                    {...prevData, 
-                    validation_error:res.data.validation_error, 
-                    message:res.data.message, 
-                    error:res.data.error}
-                ))
+                    // Alert validation errors
+                    if (res.data.validation_error) {
+                        for (const field in res.data.validation_error) {
+                            if (res.data.validation_error[field]) {
+                                alert(`Validation Error (${field}): ${res.data.validation_error[field].join(', ')}`);
+                            }
+                        }
+                    }
     
-                if(res.data.status !== 200){ 
-                    setMessages(customStateMethods.getAlertDiv(res.data.message));  
-                } else{
-                    setMessages(customStateMethods.getAlertDiv(res.data.message));
-                }
-
-                if(res.data){
+                    // Alert general errors
+                    if (res.data.error) {
+                        alert(`Error: ${res.data.error}`);
+                    }
+    
+                    // Alert success messages
+                    if (res.data.message) {
+                        alert(`Success: ${res.data.message}`);
+                    }
+    
+                    // Set messages in the UI
+                    if (res.data.status !== 200) { 
+                        setMessages(customStateMethods.getAlertDiv(res.data.message));  
+                    } else {
+                        setMessages(customStateMethods.getAlertDiv(res.data.message));
+                    }
+    
+                    // Stop loading
+                    if (res.data) {
+                        setLoading(false);
+                    }
+                })
+                .catch(error => {
                     setLoading(false);
-                }
-                
-            })
-            .catch(error => {
-                setLoading(false);
-                console.log(error);  // Handle API error
+                    console.log(error);  // Log API error
+                    alert(`API Error: ${error.message}`); // Alert API errors
+                });
             });
-        });
-        
         } catch (error) {
-        console.log(error);  // Handle any unexpected errors
+            setLoading(false);
+            console.log(error);  // Log unexpected errors
+            alert(`Unexpected Error: ${error.message}`); // Alert unexpected errors
         }
     }
 
@@ -212,19 +234,21 @@ export const EditDoctor = () => {
 
                                                 <div className="form-floating mb-3 col-lg-6">
                                                     <input 
-                                                    disabled
-                                                    type="text" 
-                                                    className="form-control" 
-                                                    id="phone" 
-                                                    name="phone"
-                                                    value={docOldData.phone}
-                                                    onChange={handleChange}
-                                                    placeholder="Phone Number" 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        id="phone" 
+                                                        name="phone"
+                                                        value={docOldData.phone}
+                                                        onChange={handleChange}
+                                                        placeholder="Phone Number" 
                                                     />
                                                     <label htmlFor="phone" className='mx-1'>Phone Number</label>
-                                                    <span style={{ color: 'orange' }}>
-                                                    {serverResponse && serverResponse.validation_error ? serverResponse.validation_error.phone : ''}
-                                                    </span>
+                                                    {/* Display the validation error for the phone field */}
+                                                    {serverResponse.validation_error && serverResponse.validation_error.phone && (
+                                                        <span style={{ color: 'orange' }}>
+                                                            {serverResponse.validation_error.phone[0]} {/* Display the first error message */}
+                                                        </span>
+                                                    )}
                                                 </div>
 
                                                 <div className="form-floating mb-3 col-lg-6">

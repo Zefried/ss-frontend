@@ -168,7 +168,7 @@ export const EditLab = () => {
                                 setMessages(customStateMethods.getAlertDiv(res.data.message));
                             } else {
                                 setMessages(customStateMethods.getAlertDiv(res.data.message));
-                                navigate('/admin')
+                                navigate('/admin/view-lab')
                             }
 
                             // Hide loading spinner if response received
@@ -249,7 +249,6 @@ export const EditLab = () => {
 
                             <div className="form-floating mb-3 col-lg-6">
                             <input
-                            disabled
                             type="text"
                             className="form-control"
                             id="phone"

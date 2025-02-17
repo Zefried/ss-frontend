@@ -346,9 +346,9 @@ let mainTable = listData?.items.map((items, index) => (
                 </div>
             )}
         </td>
-        <td>
+        {/* <td>
             <Link className="btn btn-outline-danger btn-sm" onClick={()=>handleDisable(items.id)}>Disable</Link>
-        </td>
+        </td> */}
     </tr>
 ));
 
@@ -394,7 +394,7 @@ return (
                         <th>S.No</th>
                         <th>Location Name</th>
                         <th>Edit Location</th>
-                        <th>Disable Location</th>
+                        {/* <th>Disable Location</th> */}
                     </tr>
                 </thead>
                 <tbody>

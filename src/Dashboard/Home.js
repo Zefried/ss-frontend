@@ -103,11 +103,27 @@ export const Home = () => {
                     <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patients</Link>
                     <Link className="collapse-item" to='/lab/view-paid-patients' >View Paid Patients</Link>
                     <Link className="collapse-item" to='/lab/view-pending-patients' >View Pending Patients</Link>
-                    
+            
+                </div>
+                </div>
+            </li>
+
+
+            <li className="nav-item">
+                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
+                <i className="fas fa-fw fa-cog" />
+                <span>Enable Disable Control</span>
+                </a>
+                <div id="collapseSix" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div className="bg-white py-2 collapse-inner rounded">
+
                     <h6 className="collapse-header">Enable Patient Data:</h6>
                     <Link className="collapse-item" to='/admin/enable-patient' >Enable Patients</Link>
                     <Link className="collapse-item" to='/admin/enable-users' >Enable Doc & Worker</Link>
                     <Link className="collapse-item" to='/admin/enable-labs' >Enable Labs</Link>
+                    <Link className="collapse-item" to='/admin/enable-tests' >Enable Tests</Link>
+                    <Link className="collapse-item" to='/admin/enable-testCategory' >Enable Test Category</Link>
+                    <Link className="collapse-item" to='/admin/enable-employee' >Enable Employee</Link>
 
 
                 </div>
