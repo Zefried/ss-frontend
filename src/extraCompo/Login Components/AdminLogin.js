@@ -58,49 +58,54 @@ export const AdminLogin = () => {
     };
 
     return (
-        <div>
-            {loading && <div className="spinner-border text-primary" role="status"><span className="visually-hidden">Loading...</span></div>}
-            {messages && <div className="alert alert-info" role="alert">{messages}</div>}
-
-            <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-lg-6 col-md-8 col-sm-10">
-                        <div className="card">
-                            <div className="card-body p-4">
-                                <h2 className="text-center mb-4">Admin Login</h2>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="form-floating mb-3">
-                                        <input 
-                                            type="email" 
-                                            className="form-control" 
-                                            id="email" 
-                                            placeholder="name@example.com" 
-                                            name='email'
-                                            onChange={handleChange} 
-                                        />
-                                        <label htmlFor="email">Email address</label>
-                                        {serverResponse.validation_error && <div className="text-danger">{serverResponse.validation_error.email}</div>}
-                                    </div>
-                                    <div className="form-floating mb-3">
-                                        <input 
-                                            type="password" 
-                                            className="form-control" 
-                                            id="password" 
-                                            placeholder="Password" 
-                                            name='password'
-                                            onChange={handleChange} 
-                                        />
-                                        <label htmlFor="password">Password</label>
-                                        {serverResponse.validation_error && <div className="text-danger">{serverResponse.validation_error.password}</div>}
-                                    </div>
-                                    <button type="submit" className="btn btn-primary w-100">Login</button>
-                                </form>
+        <div className="container mt-5 px-3">
+        {loading && (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )}
+        {messages && <div className="alert alert-info" role="alert">{messages}</div>}
+    
+        <div className="row justify-content-center">
+            <div className="col-lg-5 col-md-7 col-sm-10">
+                <div className="card shadow-sm">
+                    <div className="card-body p-4">
+                        <h2 className="text-center mb-4">Admin Login</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-floating mb-3">
+                                <input 
+                                    type="email" 
+                                    className="form-control" 
+                                    id="email" 
+                                    placeholder="name@example.com" 
+                                    name="email"
+                                    onChange={handleChange} 
+                                />
+                                <label htmlFor="email">Email address</label>
+                                {serverResponse.validation_error && <div className="text-danger">{serverResponse.validation_error.email}</div>}
                             </div>
-                        </div>
+                            <div className="form-floating mb-3">
+                                <input 
+                                    type="password" 
+                                    className="form-control" 
+                                    id="password" 
+                                    placeholder="Password" 
+                                    name="password"
+                                    onChange={handleChange} 
+                                />
+                                <label htmlFor="password">Password</label>
+                                {serverResponse.validation_error && <div className="text-danger">{serverResponse.validation_error.password}</div>}
+                            </div>
+                            <button type="submit" className="btn btn-primary w-100 py-2">Login</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+    
     );
 };
 

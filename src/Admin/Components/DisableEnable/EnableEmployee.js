@@ -103,128 +103,95 @@ export const EnableEmployee = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">Disabled Employees</h2>
-
-      {/* Search Input */}
-      <input
-        type="text"
-        className="form-control mb-3"
-        placeholder="Search employees..."
-        value={query}
-        onChange={handleSearch}
-      />
-
-      {/* Loading Indicator */}
-      {loading && <p>Loading...</p>}
-
-      {/* Suggestions Dropdown */}
-      {suggestions.length > 0 && (
-        <div className="list-group">
-          {suggestions.map((suggestion) => (
-            <div
-              key={suggestion.id}
-              className="list-group-item list-group-item-action"
-              style={{ cursor: 'pointer' }}
-              onClick={() => handleSelectItem(suggestion)}
-            >
-              <span className="fw-bold">{suggestion.name}</span>
-              <br />
-              <span>Role: {suggestion.role}</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Employees List */}
-      <ul className="list-group">
-        {selectedItem ? (
-          <li
-            key={selectedItem.id}
-            className="list-group-item d-flex justify-content-between align-items-center"
+    <div className="container mt-5 px-3">
+    <h2 className="text-center mb-4">Disabled Employees</h2>
+  
+    {/* Search Input */}
+    <input
+      type="text"
+      className="form-control mb-3"
+      placeholder="Search employees..."
+      value={query}
+      onChange={handleSearch}
+    />
+  
+    {/* Loading Indicator */}
+    {loading && <p className="text-center">Loading...</p>}
+  
+    {/* Suggestions Dropdown */}
+    {suggestions.length > 0 && (
+      <div className="list-group mb-3" style={{ maxHeight: "200px", overflowY: "auto" }}>
+        {suggestions.map((suggestion) => (
+          <div
+            key={suggestion.id}
+            className="list-group-item list-group-item-action"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleSelectItem(suggestion)}
           >
-            <span className="fw-bold">{selectedItem.name}</span>
-            <button
-              className="btn btn-success btn-sm"
-              onClick={() => enableEmployee(selectedItem.id)}
-            >
+            <span className="fw-bold">{suggestion.name}</span>
+            <br />
+            <span>Role: {suggestion.role}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  
+    {/* Employees List */}
+    <ul className="list-group">
+      {selectedItem ? (
+        <li key={selectedItem.id} className="list-group-item d-flex justify-content-between align-items-center">
+          <span className="fw-bold">{selectedItem.name}</span>
+          <button className="btn btn-success btn-sm" onClick={() => enableEmployee(selectedItem.id)}>
+            Enable
+          </button>
+        </li>
+      ) : (
+        Array.isArray(employees) &&
+        employees.map((employee) => (
+          <li key={employee.id} className="list-group-item d-flex justify-content-between align-items-center">
+            <span className="fw-bold">{employee.name}</span>
+            <button className="btn btn-success btn-sm" onClick={() => enableEmployee(employee.id)}>
               Enable
             </button>
           </li>
-        ) : (
-          Array.isArray(employees) &&
-          employees.map((employee) => (
-            <li
-              key={employee.id}
-              className="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <span className="fw-bold">{employee.name}</span>
-              <button
-                className="btn btn-success btn-sm"
-                onClick={() => enableEmployee(employee.id)}
-              >
-                Enable
-              </button>
-            </li>
-          ))
-        )}
-      </ul>
-
-      {/* Pagination UI */}
-      <div className="d-flex justify-content-between align-items-center mt-3">
-        <div>
-          <select
-            className="form-select"
-            onChange={handleRow}
-            value={recordsPerPage}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-        <nav>
-          <ul className="pagination">
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-              <button
-                className="page-link"
-                onClick={() => handlePageClick(currentPage - 1)}
-              >
-                Previous
-              </button>
-            </li>
-            {getPageCount().map((page) => (
-              <li
-                key={page}
-                className={`page-item ${page === currentPage ? 'active' : ''}`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageClick(page)}
-                >
-                  {page}
-                </button>
-              </li>
-            ))}
-            <li
-              className={`page-item ${
-                currentPage === Math.ceil(totalRecords / recordsPerPage)
-                  ? 'disabled'
-                  : ''
-              }`}
-            >
-              <button
-                className="page-link"
-                onClick={() => handlePageClick(currentPage + 1)}
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
+        ))
+      )}
+    </ul>
+  
+    {/* Pagination UI */}
+    <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
+      <div className="mb-2 mb-md-0">
+        <select className="form-select" onChange={handleRow} value={recordsPerPage}>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
       </div>
+      <nav>
+        <ul className="pagination pagination-sm">
+          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+            <button className="page-link" onClick={() => handlePageClick(currentPage - 1)}>
+              Previous
+            </button>
+          </li>
+          {getPageCount().map((page) => (
+            <li key={page} className={`page-item ${page === currentPage ? "active" : ""}`}>
+              <button className="page-link" onClick={() => handlePageClick(page)}>
+                {page}
+              </button>
+            </li>
+          ))}
+          <li className={`page-item ${currentPage === Math.ceil(totalRecords / recordsPerPage) ? "disabled" : ""}`}>
+            <button className="page-link" onClick={() => handlePageClick(currentPage + 1)}>
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
+    </div>
+  
   );
 };
