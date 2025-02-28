@@ -101,8 +101,8 @@ export const Home = () => {
                     <Link className="collapse-item" to='/user/add-patient' >Add Patient</Link>
                     <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
                     <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patients</Link>
-                    <Link className="collapse-item" to='/lab/view-paid-patients' >View Paid Patients</Link>
-                    <Link className="collapse-item" to='/lab/view-pending-patients' >View Pending Patients</Link>
+                    <Link className="collapse-item" to='/lab/view-paid-patients' >View Completed Patients</Link>
+                    <Link className="collapse-item" to='/lab/view-pending-patients' >View Billed Patients</Link>
             
                 </div>
                 </div>
@@ -119,7 +119,7 @@ export const Home = () => {
 
                     <h6 className="collapse-header">Enable Patient Data:</h6>
                     <Link className="collapse-item" to='/admin/enable-patient' >Enable Patients</Link>
-                    <Link className="collapse-item" to='/admin/enable-users' >Enable Doc & Worker</Link>
+                    <Link className="collapse-item" to='/admin/enable-users' >Enable Doc & Sewak</Link>
                     <Link className="collapse-item" to='/admin/enable-labs' >Enable Labs</Link>
                     <Link className="collapse-item" to='/admin/enable-tests' >Enable Tests</Link>
                     <Link className="collapse-item" to='/admin/enable-testCategory' >Enable Test Category</Link>
@@ -160,8 +160,8 @@ export const Home = () => {
                     <Link className="collapse-item" to='/user/add-patient' >Add Patient</Link>
                     <Link className="collapse-item" to='/user/view-patient' >View All Patient</Link>
                     <Link className="collapse-item" to='/user/view-assigned-patients' >View Assigned Patient</Link>
-                    <Link className="collapse-item" to='/lab/view-paid-patients' >View Paid Patients</Link>
-                    <Link className="collapse-item" to='/lab/view-pending-patients' >View Pending Patients</Link>
+                    <Link className="collapse-item" to='/lab/view-paid-patients' >View Completed Patients</Link>
+                    <Link className="collapse-item" to='/lab/view-pending-patients' >View Billed Patients</Link>
                     
                 </div>
                 </div>

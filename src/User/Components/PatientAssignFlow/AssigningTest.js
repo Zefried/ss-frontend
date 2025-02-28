@@ -67,7 +67,7 @@ export const AssigningTest = () => {
         // Fetching suggestions from the API
         if (searchValue.length > 1) {
             try {
-                const response = await axios.get(`/api/user/patient-assign-flow/searching/test/?query=${searchValue}`, {
+                const response = await axios.get(`/api/user/patient-assign-flow/searching/test?query=${searchValue}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

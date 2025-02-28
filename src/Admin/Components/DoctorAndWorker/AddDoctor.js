@@ -184,7 +184,7 @@ export const AddDoctors = () => {
             <div className="container mt-5">
                 <div className="card shadow-lg border-0 rounded-4" id='doc-bg'>
                     <div className="card-body p-4">
-                    <h3 className="text-center mb-4">Register Doctor & Worker | {step}</h3>
+                    <h3 className="text-center mb-4">Register Doctor & Sewak | {step}</h3>
                     {messages}
                     {loading}
                 
@@ -200,7 +200,7 @@ export const AddDoctors = () => {
                                                     <select className="form-control" id="profession" name="profession" value={formData.profession} onChange={handleChange} >
                                                         <option value="">Select Profession ? </option>
                                                         <option value="doctor">Doctor</option>
-                                                        <option value="worker">Worker</option>
+                                                        <option value="worker">Sewak</option>
                                                     </select>
                                                     <label htmlFor="profession" className="mx-1">Profession</label>
                                                     <span style={{ color: 'orange' }}>

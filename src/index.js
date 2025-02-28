@@ -20,8 +20,8 @@ import '../src/assets/vendor/fontawesome-free/css/all.min.css';
 
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;  
-// axios.defaults.baseURL = 'https://backend.zefftest.shop/';
-axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.baseURL = 'https://jkswasthasewa.com/';
+// axios.defaults.baseURL = 'http://localhost:8000/'; // for local development
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
